@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seller Center cho người mới</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sticky left index of tabs grouped by job, reading column on the right; index folds into a menu on phones. */
+:root {
+  --bg: #F2F5F8;
+  --surface: #FFFFFF;
+  --ink: #13202C;
+  --muted: #556473;
+  --line: #D9E0E7;
+  --accent: #0B5CAD;
+  --accent-bg: #E4EFFA;
+  --ops: #0B7564;
+  --ops-bg: #E1F2EE;
+  --traffic: #5240BF;
+  --traffic-bg: #ECE8FA;
+  --control: #B5401F;
+  --control-bg: #FAE9E3;
+  --warn: #8A5A00;
+  --warn-bg: #FBF0D8;
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E151C;
+    --surface: #16202A;
+    --ink: #E6EDF3;
+    --muted: #9AA9B7;
+    --line: #26333F;
+    --accent: #6DB1F2;
+    --accent-bg: #15304A;
+    --ops: #54C7B1;
+    --ops-bg: #11372F;
+    --traffic: #ADA0FF;
+    --traffic-bg: #262152;
+    --control: #FF9C80;
+    --control-bg: #48251A;
+    --warn: #F2C263;
+    --warn-bg: #3A2D10;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E151C;
+  --surface: #16202A;
+  --ink: #E6EDF3;
+  --muted: #9AA9B7;
+  --line: #26333F;
+  --accent: #6DB1F2;
+  --accent-bg: #15304A;
+  --ops: #54C7B1;
+  --ops-bg: #11372F;
+  --traffic: #ADA0FF;
+  --traffic-bg: #262152;
+  --control: #FF9C80;
+  --control-bg: #48251A;
+  --warn: #F2C263;
+  --warn-bg: #3A2D10;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.7; padding-inline: 16px; padding-block: 20px 56px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+header.top h1 { font-size: clamp(1.45rem, 3.2vw, 2rem); line-height: 1.2; margin: 0; font-weight: 600; text-wrap: balance; }
+header.top p { margin: 4px 0 0; color: var(--muted); max-width: 60ch; }
+.progress { min-width: 180px; font-size: 13px; color: var(--muted); }
+.bar { height: 6px; background: var(--line); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+.bar i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s; }
+.layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 28px; align-items: start; }
+nav.index { position: sticky; top: 12px; max-height: calc(100vh - 24px); overflow-y: auto; padding-right: 4px; }
+.menu-btn { display: none; }
+#search { width: 100%; font: inherit; font-size: 14px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); margin-bottom: 12px; }
+#search:focus-visible, .tab:focus-visible, .pager button:focus-visible, .menu-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.grp { margin: 14px 0 4px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+.tab { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; text-align: left; font: inherit; background: none; border: 0; border-radius: 6px; padding: 7px 10px; color: var(--ink); cursor: pointer; }
+.tab:hover { background: var(--surface); }
+.tab .en { font-weight: 500; display: block; line-height: 1.3; }
+.tab .vi { font-size: 12.5px; color: var(--muted); display: block; line-height: 1.3; }
+.tab.on { background: var(--surface); box-shadow: inset 0 0 0 1px var(--line); }
+.tab.on .en { color: var(--g, var(--accent)); }
+.tab .dot { flex: none; width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--line); }
+.tab.done .dot { background: var(--g, var(--accent)); border-color: var(--g, var(--accent)); }
+main.doc { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: clamp(18px, 3.4vw, 36px); }
+main.doc[data-g="ops"] { --g: var(--ops); --gbg: var(--ops-bg); }
+main.doc[data-g="traffic"] { --g: var(--traffic); --gbg: var(--traffic-bg); }
+main.doc[data-g="control"] { --g: var(--control); --gbg: var(--control-bg); }
+main.doc[data-g="start"] { --g: var(--accent); --gbg: var(--accent-bg); }
+.crumb { display: inline-block; font-family: var(--font-mono); font-size: 12px; background: var(--gbg); color: var(--g); padding: 3px 9px; border-radius: 4px; }
+main.doc h2.title { font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.2; margin: 12px 0 2px; font-weight: 600; text-wrap: balance; }
+.vi-title { color: var(--muted); font-size: 1.05rem; margin: 0 0 14px; }
+.lead { font-size: 1.05rem; max-width: 65ch; margin: 0 0 8px; }
+.blk { margin-top: 28px; }
+.blk > h3 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--g); font-weight: 600; margin: 0 0 10px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.card { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; min-width: 0; }
+.card b { display: block; font-weight: 600; line-height: 1.4; margin-bottom: 2px; }
+.card span { color: var(--muted); font-size: 14px; display: block; }
+ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 10px; }
+ol.steps li { counter-increment: s; position: relative; padding-left: 38px; max-width: 70ch; }
+ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 26px; height: 26px; border-radius: 50%; background: var(--gbg); color: var(--g); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
+ul.plain { margin: 0; padding-left: 20px; max-width: 70ch; }
+ul.plain li { margin-bottom: 6px; }
+.note { border-radius: 8px; padding: 14px 16px; background: var(--gbg); }
+.note.warn { background: var(--warn-bg); }
+.note h3 { color: var(--g); }
+.note.warn h3 { color: var(--warn); }
+.note ul { margin: 0; padding-left: 20px; max-width: 70ch; }
+.note li { margin-bottom: 5px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
+th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 500; color: var(--muted); font-size: 12.5px; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td.en { font-family: var(--font-mono); font-size: 13px; white-space: nowrap; color: var(--g); }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); flex-wrap: wrap; }
+.pager button { font: inherit; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 6px; padding: 9px 14px; cursor: pointer; max-width: 100%; text-align: left; }
+.pager button:hover { border-color: var(--g); }
+.pager small { display: block; color: var(--muted); font-size: 12px; }
+.disclaimer { margin-top: 20px; font-size: 13px; color: var(--muted); max-width: 70ch; }
+#gloss-search { width: 100%; max-width: 380px; font: inherit; font-size: 14px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); margin-bottom: 12px; }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  nav.index { position: static; max-height: none; }
+  .menu-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; font: inherit; font-weight: 500; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 11px 14px; cursor: pointer; }
+  nav.index .list { display: none; margin-top: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px; }
+  nav.index.open .list { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .bar i { transition: none; } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Seller Center cho người mới</h1>
+      <p>Tài liệu tiếng Việt kèm thuật ngữ tiếng Anh cho từng mục trong TikTok Shop Seller Center US. Bấm một tab để đọc công dụng và cách dùng.</p>
+    </div>
+    <div class="progress"><span id="prog-text">Đã đọc 0/0</span><div class="bar"><i id="prog-bar"></i></div></div>
+  </header>
+  <div class="layout">
+    <nav class="index" id="index" aria-label="Danh sách mục">
+      <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="tablist"><span id="menu-label">Chọn mục</span><span aria-hidden="true">▾</span></button>
+      <div class="list" id="tablist">
+        <input id="search" type="search" placeholder="Tìm mục (ví dụ: orders, đơn hàng)" aria-label="Tìm mục">
+        <div id="tabs"></div>
+      </div>
+    </nav>
+    <main class="doc" id="doc" tabindex="-1"></main>
+  </div>
+</div>
+
+<script>
+var DATA = [
+{ id: 'start', g: 'start', en: 'Getting started', vi: 'Bắt đầu', lead: 'TikTok Shop là nơi bán hàng ngay trong TikTok. Seller Center (Trung tâm người bán) là trang web bạn dùng để quản lý toàn bộ shop. Mỗi mục trong menu bên trái của Seller Center tương ứng với một tab ở đây.', b: [
+  ['cards', 'Khách mua hàng bằng 3 kênh (Sales channels)', [
+    ['Video (Short video)', 'Video ngắn gắn giỏ hàng. Khách xem, bấm vào sản phẩm và mua.'],
+    ['LIVE (Livestream)', 'Bán hàng trực tiếp, có ưu đãi giới hạn thời gian.'],
+    ['Shop tab (Tab mua sắm)', 'Khách vào duyệt và tìm kiếm giống một sàn thương mại điện tử.']
+  ]],
+  ['cards', '15 mục chia thành 3 nhóm', [
+    ['Operations (Vận hành)', 'Home, Orders, Products, Logistics. Việc làm hằng ngày để shop chạy.'],
+    ['Traffic & sales (Kéo khách, bán hàng)', 'Affiliate, Content hub, LIVE selling, Growth, Shop & promotions, Marketing.'],
+    ['Control (Kiểm soát)', 'Analytics, Account health, Finances, Partner, Apps. Theo dõi số liệu, điểm và tiền.']
+  ]],
+  ['ol', 'Lộ trình 30 ngày đầu (30-day roadmap)', [
+    'Tuần 1: hoàn tất đăng ký và xác minh, thiết lập Logistics (kho, vận chuyển, đổi trả). Đọc kỹ Policy và Academy.',
+    'Tuần 2: đăng 10 đến 20 sản phẩm chuẩn trong Products (ảnh rõ, bảng size, mô tả đúng). Tạo voucher đầu tiên trong Shop & promotions.',
+    'Tuần 3: quay 5 đến 10 video mỗi tuần trong Content hub. Bật Affiliate và gửi mẫu cho vài creator.',
+    'Tuần 4: xem Analytics, giữ sản phẩm bán tốt, sửa hoặc ẩn sản phẩm yếu. Thử một buổi LIVE ngắn. Mở Account health mỗi ngày.'
+  ]],
+  ['tip', 'Ba nguyên tắc cốt lõi (Core principles)', [
+    'Giao đúng hạn, mô tả đúng sự thật. Điểm shop là tài sản lớn nhất của bạn.',
+    'Bán ít sản phẩm nhưng làm thật tốt, rồi nhân rộng cái đang ra đơn.',
+    'Dùng thông tin thật và nhất quán (danh tính, địa chỉ, thiết bị). Làm đúng ngay từ đầu rẻ hơn nhiều so với khôi phục tài khoản bị khóa.'
+  ]]
+]},
+
+{ id: 'home', g: 'ops', en: 'Home', vi: 'Trang chủ', lead: 'Trang đầu tiên hiện ra sau khi đăng nhập. Hãy xem nó như bảng đồng hồ của một chiếc xe: liếc qua là biết shop đang ổn hay có vấn đề.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Doanh thu hôm nay (Today sales)', 'Số tiền và số đơn phát sinh trong ngày, so với hôm qua.'],
+    ['Việc cần làm (To-do)', 'Đơn cần giao, sản phẩm bị từ chối, khiếu nại đang chờ phản hồi.'],
+    ['Cảnh báo (Alerts)', 'Vi phạm mới, sản phẩm sắp hết hàng, đơn sắp trễ hạn giao.'],
+    ['Thông báo (Announcements)', 'Chính sách mới, chiến dịch sắp diễn ra, thay đổi phí.']
+  ]],
+  ['ol', 'Thói quen mỗi sáng (Daily routine)', [
+    'Xem cảnh báo màu đỏ hoặc cam trước.',
+    'Mở danh sách đơn sắp trễ hạn giao.',
+    'So doanh thu với hôm qua để biết xu hướng.',
+    'Đọc thông báo chính sách mới.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Chỉ nhìn doanh thu mà bỏ qua cảnh báo.',
+    'Không đọc thông báo chính sách. Đa số shop bị phạt vì không biết luật đổi, không phải vì cố tình vi phạm.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Dashboard', 'Bảng điều khiển', 'Màn hình tổng hợp số liệu chính.'],
+    ['Alert', 'Cảnh báo', 'Thông báo cần xử lý sớm.'],
+    ['Announcement', 'Thông báo từ sàn', 'Tin về chính sách, chiến dịch.']
+  ]]
+]},
+
+{ id: 'orders', g: 'ops', en: 'Orders', vi: 'Đơn hàng', lead: 'Nơi bạn nhìn thấy và xử lý mọi đơn khách đặt. Giao đúng hạn ở đây quyết định điểm shop, nên đây là mục quan trọng nhất trong vận hành.', b: [
+  ['cards', 'Các trạng thái đơn thường gặp (Order statuses)', [
+    ['Unpaid (Chưa thanh toán)', 'Khách đặt nhưng chưa trả tiền.'],
+    ['To ship (Chờ giao)', 'Bạn cần đóng gói và bàn giao cho vận chuyển.'],
+    ['Shipped (Đã gửi)', 'Đơn đã rời shop, đang trên đường.'],
+    ['Delivered (Đã giao)', 'Khách nhận hàng.'],
+    ['Completed (Hoàn tất)', 'Hết thời gian đổi trả, tiền được chuyển vào số dư.'],
+    ['Cancelled (Đã hủy)', 'Đơn bị hủy bởi khách, shop hoặc hệ thống.']
+  ]],
+  ['ol', 'Xử lý một đơn (Order handling flow)', [
+    'Mở đơn ở trạng thái To ship và kiểm tra tồn kho thật.',
+    'In nhãn vận chuyển (Print shipping label) và dán lên kiện hàng.',
+    'Đóng gói chắc chắn, chụp ảnh hoặc quay video lúc đóng gói để làm bằng chứng.',
+    'Bàn giao cho đơn vị vận chuyển trong thời gian đã cam kết.',
+    'Theo dõi mã vận đơn (tracking number) đến khi giao xong.',
+    'Nếu khách yêu cầu trả hàng hoặc hoàn tiền, phản hồi đúng hạn.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Cập nhật tồn kho ngay khi hết hàng để không phải hủy đơn.',
+    'Đóng gói có túi hoặc hộp chắc, kèm tem thông tin sản phẩm. Hàng rách hoặc bẩn là nguyên nhân hoàn hàng phổ biến.',
+    'Đặt giờ cố định mỗi ngày để in nhãn và bàn giao hàng.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Giao trễ (late dispatch) hoặc shop tự hủy đơn (seller cancellation) bị trừ điểm.',
+    'Không giữ bằng chứng đóng gói nên thua khi có khiếu nại.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Shipping label', 'Nhãn vận chuyển', 'Tem dán lên kiện hàng, chứa thông tin người nhận.'],
+    ['Tracking number', 'Mã vận đơn', 'Mã để theo dõi hành trình kiện hàng.'],
+    ['Return', 'Trả hàng', 'Khách gửi hàng lại cho shop.'],
+    ['Refund', 'Hoàn tiền', 'Trả lại tiền cho khách.'],
+    ['Cancellation', 'Hủy đơn', 'Đơn không tiếp tục xử lý.'],
+    ['Late dispatch rate', 'Tỉ lệ giao trễ', 'Phần trăm đơn bàn giao quá hạn.']
+  ]]
+]},
+
+{ id: 'products', g: 'ops', en: 'Products', vi: 'Sản phẩm', lead: 'Nền móng của cả shop. Sản phẩm đăng đúng chuẩn thì dễ được duyệt, dễ bán và ít bị hoàn hàng.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Add product (Thêm sản phẩm)', 'Tạo trang bán mới với tiêu đề, ảnh, mô tả, giá.'],
+    ['Variants & SKU (Biến thể và mã hàng)', 'Mỗi cặp size và màu là một SKU có tồn kho riêng.'],
+    ['Inventory (Tồn kho)', 'Cập nhật số lượng còn để tránh bán quá số có.'],
+    ['Product status (Trạng thái sản phẩm)', 'Live (đang bán), In review (đang duyệt), Rejected (bị từ chối), Deactivated (bị gỡ).']
+  ]],
+  ['ol', 'Đăng một sản phẩm (Listing flow)', [
+    'Chọn danh mục (category) đúng, ví dụ Women\'s Tops hoặc Men\'s T-shirts.',
+    'Viết tiêu đề: từ khóa chính, loại sản phẩm, đối tượng, đặc điểm. Ví dụ: Oversized Graphic Tee Women Cotton Summer.',
+    'Tải ảnh: ảnh đầu nền sạch và sáng, ảnh mặc thật, ảnh chi tiết vải và đường may, ảnh bảng size.',
+    'Viết mô tả: chất liệu, form dáng, cách giặt, số đo bằng inch, xuất xứ. Mô tả đúng thực tế.',
+    'Tạo biến thể size, màu và đặt giá, tồn kho cho từng SKU.',
+    'Nhập cân nặng và kích thước kiện hàng, chọn cách giao, rồi gửi duyệt.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Bắt đầu với 10 đến 20 mẫu bán chạy thay vì hàng trăm mẫu. Xem mẫu nào ra đơn rồi mới mở rộng.',
+    'Với áo quần, bảng size theo chuẩn Mỹ (US size) giúp giảm hoàn hàng rõ rệt.',
+    'Tính giá từ chi phí ngược lên: giá vốn, vận chuyển, phí sàn, hoa hồng affiliate, dự phòng hoàn hàng, lợi nhuận.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Lấy ảnh hoặc mô tả của người khác, dễ bị khiếu nại bản quyền.',
+    'Dùng logo, hình nhân vật hoặc thương hiệu không thuộc về bạn, sản phẩm bị từ chối.',
+    'Mô tả không khớp hàng thật, khách trả hàng và đánh giá thấp.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Listing', 'Bài đăng sản phẩm', 'Trang bán một sản phẩm.'],
+    ['SKU (Stock Keeping Unit)', 'Mã đơn vị hàng tồn', 'Một biến thể cụ thể, ví dụ áo size M màu đen.'],
+    ['Variant', 'Biến thể', 'Các lựa chọn size, màu của một sản phẩm.'],
+    ['Inventory', 'Tồn kho', 'Số lượng hàng còn.'],
+    ['Category', 'Danh mục', 'Nhóm sản phẩm trên sàn.'],
+    ['Brand authorization', 'Ủy quyền thương hiệu', 'Giấy phép để bán hàng mang thương hiệu của người khác.']
+  ]]
+]},
+
+{ id: 'logistics', g: 'ops', en: 'Logistics', vi: 'Vận chuyển', lead: 'Nơi bạn khai báo hàng nằm ở đâu, giao bằng cách nào và trả lại về đâu. Cài đặt sai ở đây khiến giao trễ và bị trừ điểm.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Warehouse address (Địa chỉ kho)', 'Nơi đơn vị vận chuyển đến lấy hàng.'],
+    ['Return address (Địa chỉ hoàn hàng)', 'Nơi khách gửi trả. Phải nhận được thư thật.'],
+    ['Shipping options (Phương thức giao)', 'Chọn hãng vận chuyển và mức phí.'],
+    ['Handling time (Thời gian chuẩn bị hàng)', 'Số ngày bạn cần để đóng gói và bàn giao.']
+  ]],
+  ['cards', 'Hai cách giao hàng (Fulfillment models)', [
+    ['Seller-fulfilled (Người bán tự giao)', 'Bạn tự đóng gói và gửi. Linh hoạt, nhưng tự chịu thời gian giao.'],
+    ['FBT, Fulfilled by TikTok (TikTok lưu kho và giao hộ)', 'Gửi hàng vào kho TikTok. Giao nhanh hơn nhưng có phí lưu kho và quy cách nhập hàng.']
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Khách Mỹ quen nhận hàng sau vài ngày. Hàng gửi từ xa mất nhiều tuần sẽ kéo điểm xuống.',
+    'Có kho hoặc dịch vụ fulfillment ở Mỹ thì ổn định hơn nhiều.',
+    'Đặt handling time thực tế, đừng hứa nhanh hơn khả năng thật.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Địa chỉ hoàn hàng sai hoặc không ai nhận.',
+    'Khai báo cân nặng và kích thước sai khiến phí vận chuyển chênh lệch.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Fulfillment', 'Xử lý và giao đơn', 'Từ đóng gói đến giao tới khách.'],
+    ['Carrier', 'Đơn vị vận chuyển', 'Hãng giao hàng.'],
+    ['Warehouse', 'Kho', 'Nơi cất hàng.'],
+    ['Handling time', 'Thời gian chuẩn bị hàng', 'Từ lúc có đơn đến lúc bàn giao.'],
+    ['FBT', 'TikTok lưu kho, giao hộ', 'Dịch vụ kho và giao của sàn.']
+  ]]
+]},
+
+{ id: 'affiliate', g: 'traffic', en: 'Affiliate', vi: 'Tiếp thị liên kết', lead: 'Cho phép creator (người làm nội dung) quảng bá sản phẩm của bạn và nhận hoa hồng khi bán được. Đây thường là kênh tạo đơn mạnh nhất với shop mới.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Open collaboration (Hợp tác mở)', 'Mở sản phẩm cho mọi creator, đặt một tỉ lệ hoa hồng chung.'],
+    ['Target collaboration (Hợp tác mục tiêu)', 'Mời riêng từng creator, thường kèm hoa hồng cao hơn.'],
+    ['Sample requests (Yêu cầu hàng mẫu)', 'Creator xin hàng để quay. Bạn duyệt hoặc từ chối.'],
+    ['Creator marketplace (Tìm creator)', 'Tìm người phù hợp theo lĩnh vực, lượt xem, doanh số.']
+  ]],
+  ['ol', 'Bắt đầu với Affiliate (Getting started)', [
+    'Chọn sản phẩm chủ lực và đặt tỉ lệ hoa hồng (commission rate) đủ hấp dẫn nhưng vẫn có lãi.',
+    'Bật Open collaboration cho sản phẩm đó.',
+    'Tìm 10 đến 20 creator đúng tệp khách và gửi lời mời Target collaboration.',
+    'Duyệt yêu cầu hàng mẫu từ creator có tương tác tốt.',
+    'Theo dõi video nào ra đơn và tăng hoa hồng cho creator hiệu quả.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Chọn creator theo tỉ lệ tương tác và tệp người xem, không chỉ số người theo dõi.',
+    'Hoa hồng ban đầu nên rộng rãi để thu hút, rồi điều chỉnh khi có dữ liệu.',
+    'Đồ áo cần gửi mẫu thật để creator mặc và quay.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Gửi mẫu cho creator nhưng không theo dõi, creator không đăng video, mất hàng.',
+    'Đặt hoa hồng quá cao đến mức bán hết vẫn lỗ.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Affiliate', 'Tiếp thị liên kết', 'Người bán giúp bạn, nhận hoa hồng.'],
+    ['Creator', 'Người sáng tạo nội dung', 'Người làm video hoặc LIVE.'],
+    ['Commission', 'Hoa hồng', 'Phần trăm doanh thu trả cho creator.'],
+    ['Sample', 'Hàng mẫu', 'Sản phẩm gửi cho creator để quay.'],
+    ['Engagement rate', 'Tỉ lệ tương tác', 'Thích, bình luận, chia sẻ so với lượt xem.']
+  ]]
+]},
+
+{ id: 'content-hub', g: 'traffic', en: 'Content hub', vi: 'Trung tâm nội dung', lead: 'Nơi quản lý video của shop và video do creator làm cho sản phẩm của bạn. Bạn xem video nào thực sự ra đơn, không chỉ nhiều lượt xem.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Video library (Thư viện video)', 'Danh sách video của shop và video có gắn sản phẩm của bạn.'],
+    ['Product tagging (Gắn sản phẩm)', 'Gắn giỏ hàng vào video để khách mua ngay.'],
+    ['Video performance (Hiệu quả video)', 'Lượt xem, lượt bấm, số đơn, doanh thu của từng video.']
+  ]],
+  ['ol', 'Công thức video áo bán chạy (Video formula)', [
+    'Hook (đoạn mở đầu) trong 3 giây đầu: cảnh mặc đẹp, hoặc câu như áo này giá dưới 20 đô nhưng form rất đẹp.',
+    'Cho xem chất vải, form dáng và 2 đến 3 cách phối.',
+    'Kết bằng CTA (lời kêu gọi hành động): bấm giỏ hàng bên dưới.',
+    'Giữ video ngắn, đăng đều đặn, quay nhiều video mỗi tuần thay vì làm ít video cầu kỳ.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Tìm video ra đơn tốt nhất, làm lại cùng hook và cách quay với mẫu khác.',
+    'Dùng ánh sáng tự nhiên, âm thanh rõ, phụ đề tiếng Anh cho thị trường Mỹ.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Dùng nhạc hoặc hình ảnh vi phạm bản quyền.',
+    'Nói quá sự thật về sản phẩm, dễ vi phạm chính sách nội dung.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Hook', 'Đoạn mở đầu thu hút', '3 giây đầu của video.'],
+    ['CTA (Call to Action)', 'Lời kêu gọi hành động', 'Câu bảo khách làm bước tiếp theo.'],
+    ['Product link', 'Liên kết sản phẩm', 'Giỏ hàng gắn trong video.'],
+    ['Views', 'Lượt xem', 'Số lần video được xem.']
+  ]]
+]},
+
+{ id: 'live-selling', g: 'traffic', en: 'LIVE selling', vi: 'Bán hàng livestream', lead: 'Công cụ để lên lịch, chạy và xem kết quả các buổi bán hàng trực tiếp. LIVE tạo cảm giác gấp và tin tưởng, nhưng cần chuẩn bị.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Schedule LIVE (Lên lịch LIVE)', 'Đặt trước giờ để người theo dõi biết.'],
+    ['Add products (Thêm sản phẩm vào LIVE)', 'Chọn danh sách sản phẩm sẽ bán trong buổi.'],
+    ['Pin product (Ghim sản phẩm)', 'Đưa sản phẩm đang nói lên vị trí nổi bật.'],
+    ['LIVE dashboard (Bảng số liệu LIVE)', 'Số người xem, đơn, doanh thu trong và sau buổi.']
+  ]],
+  ['ol', 'Chuẩn bị một buổi LIVE (LIVE checklist)', [
+    'Chọn 5 đến 10 sản phẩm, chuẩn bị sẵn mẫu để cầm lên cho khách xem.',
+    'Tạo ưu đãi riêng cho LIVE: voucher hoặc flash deal theo giờ.',
+    'Kiểm tra mạng, ánh sáng, âm thanh. Lên lịch trước ít nhất vài giờ.',
+    'Trong buổi: trả lời bình luận, ghim sản phẩm đang bán, nhắc ưu đãi sắp hết.',
+    'Sau buổi: xem số liệu, ghi lại sản phẩm nào bán tốt và đoạn nào khách rời đi.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Bắt đầu 1 đến 2 giờ, cùng khung giờ mỗi ngày để tạo thói quen cho khách.',
+    'Cần host nói tiếng Anh tự nhiên với thị trường Mỹ. Nếu chưa có, hợp tác creator.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'LIVE không có ưu đãi riêng nên khách không có lý do mua ngay.',
+    'Nói sai thông tin sản phẩm hoặc hứa điều không thực hiện được.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['LIVE', 'Phát trực tiếp', 'Buổi bán hàng livestream.'],
+    ['Host', 'Người dẫn LIVE', 'Người nói chuyện và giới thiệu hàng.'],
+    ['Pinned product', 'Sản phẩm được ghim', 'Sản phẩm đang được giới thiệu.'],
+    ['Flash deal', 'Giảm giá chớp nhoáng', 'Ưu đãi trong thời gian rất ngắn.'],
+    ['Concurrent viewers', 'Người xem cùng lúc', 'Số người đang xem ở một thời điểm.']
+  ]]
+]},
+
+{ id: 'growth', g: 'traffic', en: 'Growth', vi: 'Tăng trưởng', lead: 'Tập hợp công cụ, nhiệm vụ và học liệu do TikTok đưa ra để giúp shop lớn nhanh hơn. Nhiều người bỏ qua mục này dù nó miễn phí.', b: [
+  ['cards', 'Thường gồm (Typically includes)', [
+    ['Tasks & missions (Nhiệm vụ)', 'Hoàn thành mốc như số đơn đầu tiên để nhận ưu đãi.'],
+    ['Learning (Học liệu)', 'Khóa học và hướng dẫn chính thức về bán hàng, chính sách.'],
+    ['Recommendations (Gợi ý tối ưu)', 'Gợi ý sửa listing, bổ sung ảnh, cải thiện giá.'],
+    ['New seller programs (Chương trình shop mới)', 'Ưu đãi phí hoặc hỗ trợ dành cho người bán mới.']
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Mở mục này mỗi tuần một lần, xem có nhiệm vụ hoặc ưu đãi mới không.',
+    'Ưu đãi thay đổi theo thời điểm và theo từng tài khoản. Luôn đọc điều kiện trước khi tham gia.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Mission', 'Nhiệm vụ', 'Mục tiêu có thưởng.'],
+    ['Incentive', 'Ưu đãi khuyến khích', 'Giảm phí hoặc hỗ trợ cho người bán.'],
+    ['Seller Academy', 'Học viện người bán', 'Tài liệu học chính thức.']
+  ]]
+]},
+
+{ id: 'shop-promotions', g: 'traffic', en: 'Shop & promotions', vi: 'Gian hàng và khuyến mãi', lead: 'Nơi bạn trang trí trang shop và tạo các ưu đãi giá. Ưu đãi hợp lý giúp khách quyết định mua nhanh và mua nhiều hơn.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Storefront (Trang gian hàng)', 'Logo, banner, sắp xếp danh mục để khách tin tưởng.'],
+    ['Product discount (Giảm giá sản phẩm)', 'Giảm giá theo phần trăm hoặc số tiền, có thời hạn.'],
+    ['Voucher (Mã giảm giá)', 'Mã cho đơn tối thiểu hoặc cho người mới.'],
+    ['Bundle (Combo mua kèm)', 'Mua 2 giảm X hoặc mua kèm sản phẩm khác.']
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Bundle làm tăng giá trị đơn trung bình (AOV), rất hợp với áo quần.',
+    'Ưu đãi có hạn tạo cảm giác phải mua ngay.',
+    'Thiết kế trang shop gọn: logo rõ, banner đúng chủ đề, danh mục dễ tìm.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Nâng giá lên rồi giảm giá giả, nền tảng có thể coi là sai lệch giá.',
+    'Giảm quá sâu đến mức bán càng nhiều càng lỗ.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Storefront', 'Trang gian hàng', 'Giao diện cửa hàng của bạn.'],
+    ['Voucher', 'Mã giảm giá', 'Ưu đãi khách nhập hoặc nhận.'],
+    ['Bundle', 'Combo', 'Gộp sản phẩm giảm giá.'],
+    ['AOV (Average Order Value)', 'Giá trị đơn trung bình', 'Tổng tiền chia cho số đơn.'],
+    ['Discount', 'Giảm giá', 'Hạ giá theo tỉ lệ hoặc số tiền.']
+  ]]
+]},
+
+{ id: 'marketing', g: 'traffic', en: 'Marketing', vi: 'Tiếp thị, quảng cáo', lead: 'Gồm chiến dịch lớn của sàn (mùa sale) và quảng cáo trả phí để sản phẩm được nhiều người thấy hơn.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Campaigns (Chiến dịch của sàn)', 'Đăng ký tham gia đợt sale với mức giảm do sàn đặt ra.'],
+    ['Ads (Quảng cáo)', 'Trả tiền để sản phẩm hoặc video hiện cho nhiều người.'],
+    ['Budget (Ngân sách)', 'Số tiền tối đa chi mỗi ngày hoặc mỗi chiến dịch.'],
+    ['ROAS (Return on Ad Spend)', 'Doanh thu chia chi phí quảng cáo. Càng cao càng tốt.']
+  ]],
+  ['ol', 'Chạy quảng cáo an toàn (Safe ad testing)', [
+    'Chỉ chạy cho sản phẩm đã có đơn thật và đánh giá tốt.',
+    'Đặt ngân sách thử nhỏ trong vài ngày.',
+    'Xem ROAS và lợi nhuận thực sau trừ mọi chi phí.',
+    'Tăng ngân sách dần với chiến dịch có lãi. Tắt chiến dịch không lãi.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Chạy quảng cáo cho sản phẩm chưa có đánh giá, tiền chi ra khó chuyển đổi.',
+    'Tham gia chiến dịch của sàn khi biên lợi nhuận không đủ chịu mức giảm.',
+    'Chỉ nhìn doanh thu từ quảng cáo mà quên trừ giá vốn, phí và hoa hồng.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Campaign', 'Chiến dịch', 'Đợt sale hoặc đợt quảng cáo.'],
+    ['Ads', 'Quảng cáo', 'Nội dung trả phí để tăng hiển thị.'],
+    ['GMV Max', 'Quảng cáo tự động tối ưu GMV', 'Dạng quảng cáo của TikTok Shop, tên có thể thay đổi.'],
+    ['ROAS', 'Lợi nhuận trên chi phí quảng cáo', 'Doanh thu ÷ chi phí quảng cáo.'],
+    ['Budget', 'Ngân sách', 'Mức chi tối đa.'],
+    ['Impressions', 'Lượt hiển thị', 'Số lần quảng cáo được thấy.']
+  ]]
+]},
+
+{ id: 'analytics', g: 'control', en: 'Analytics', vi: 'Phân tích số liệu', lead: 'Báo cáo cho biết khách đến từ đâu, xem gì, mua gì. Số liệu giúp bạn quyết định tăng, sửa hay bỏ sản phẩm thay vì đoán.', b: [
+  ['cards', 'Chỉ số cần nhìn (Key metrics)', [
+    ['Impressions (Lượt hiển thị)', 'Có bao nhiêu người thấy sản phẩm hoặc video.'],
+    ['CTR, Click-Through Rate (Tỉ lệ nhấp)', 'Trong số người thấy, bao nhiêu người bấm vào.'],
+    ['CVR, Conversion Rate (Tỉ lệ chuyển đổi)', 'Trong số người vào trang, bao nhiêu người mua.'],
+    ['GMV, Gross Merchandise Value (Tổng giá trị hàng bán)', 'Tổng doanh số, trước khi trừ phí và hoàn tiền.'],
+    ['AOV (Giá trị đơn trung bình)', 'Tiền trung bình mỗi đơn.'],
+    ['Traffic sources (Nguồn traffic)', 'Khách đến từ video, LIVE, tìm kiếm hay affiliate.']
+  ]],
+  ['ol', 'Thói quen xem số liệu mỗi tuần (Weekly routine)', [
+    'Dành 30 phút mỗi tuần.',
+    'Ghi ra 3 sản phẩm tốt nhất và 3 sản phẩm yếu nhất.',
+    'Nhiều lượt xem nhưng CVR thấp: xem lại giá, ảnh, đánh giá.',
+    'Chốt hành động tuần sau: tăng, sửa hoặc ẩn sản phẩm.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'So sánh theo tuần để tránh bị lệch bởi ngày sale hay cuối tuần.',
+    'Một chỉ số đứng riêng ít ý nghĩa. Luôn nhìn cả chuỗi: hiển thị, nhấp, mua.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Impressions', 'Lượt hiển thị', 'Số lần được thấy.'],
+    ['CTR', 'Tỉ lệ nhấp', 'Nhấp ÷ hiển thị.'],
+    ['CVR', 'Tỉ lệ chuyển đổi', 'Đơn ÷ lượt vào trang.'],
+    ['GMV', 'Tổng giá trị hàng bán', 'Tổng doanh số.'],
+    ['AOV', 'Giá trị đơn trung bình', 'GMV ÷ số đơn.'],
+    ['Funnel', 'Phễu bán hàng', 'Từ thấy, bấm, đến mua.']
+  ]]
+]},
+
+{ id: 'account-health', g: 'control', en: 'Account health', vi: 'Sức khỏe tài khoản', lead: 'Cho biết shop có đang tuân thủ chính sách hay không. Điểm thấp có thể bị giảm hiển thị, hạn chế tính năng hoặc khóa shop, nên hãy mở mục này hằng ngày.', b: [
+  ['cards', 'Thường gồm (Typically includes)', [
+    ['Shop performance (Hiệu suất shop)', 'Điểm tổng hợp từ giao hàng, đánh giá, chăm sóc khách.'],
+    ['Violation points (Điểm vi phạm)', 'Điểm bị trừ vì vi phạm chính sách, có hạn dùng và mức xử lý.'],
+    ['Product violations (Vi phạm sản phẩm)', 'Sản phẩm bị từ chối, gỡ, hoặc cần chỉnh.'],
+    ['Fulfillment metrics (Chỉ số giao hàng)', 'Tỉ lệ giao trễ, tỉ lệ hủy đơn do shop.'],
+    ['Customer service (Chăm sóc khách)', 'Thời gian phản hồi tin nhắn, tỉ lệ khiếu nại.'],
+    ['Appeal (Khiếu nại)', 'Cách phản hồi khi cho rằng bị phạt sai.']
+  ]],
+  ['ol', 'Khi nhận một vi phạm (Handling a violation)', [
+    'Đọc kỹ lý do và điều khoản bị nêu.',
+    'Sửa ngay nguyên nhân: chỉnh listing, hoàn tất đơn, trả lời khách.',
+    'Nếu cho rằng bị phạt sai, gửi appeal kèm bằng chứng (ảnh, video đóng gói, hóa đơn, tin nhắn).',
+    'Ghi lại nguyên nhân để tránh lặp lại.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Giao đúng hạn, mô tả đúng sự thật, trả lời khách nhanh là ba việc giữ điểm tốt nhất.',
+    'Giữ thông tin tài khoản, địa chỉ và thiết bị đăng nhập nhất quán và đúng thực tế. Thay đổi bất thường có thể khiến tài khoản bị xem xét.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Phớt lờ cảnh báo cho đến khi bị hạn chế.',
+    'Gửi appeal mà không có bằng chứng.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Account health', 'Sức khỏe tài khoản', 'Tình trạng tuân thủ của shop.'],
+    ['Violation', 'Vi phạm', 'Lỗi bị trừ điểm.'],
+    ['Appeal', 'Khiếu nại', 'Yêu cầu xem xét lại quyết định.'],
+    ['Suspension', 'Đình chỉ', 'Shop bị tạm khóa.'],
+    ['Cancellation rate', 'Tỉ lệ hủy đơn', 'Đơn shop tự hủy ÷ tổng đơn.']
+  ]]
+]},
+
+{ id: 'finances', g: 'control', en: 'Finances', vi: 'Tài chính', lead: 'Nơi theo dõi tiền: bao nhiêu bán được, bị trừ những khoản nào và bao giờ tiền về ngân hàng.', b: [
+  ['cards', 'Chức năng chính (Main features)', [
+    ['Revenue & settlements (Doanh thu, đối soát)', 'Chi tiết từng đơn: tiền khách trả, phí, tiền thực nhận.'],
+    ['Fees (Các loại phí)', 'Hoa hồng sàn, phí thanh toán, phí affiliate, phí vận chuyển.'],
+    ['Balance & withdrawal (Số dư, rút tiền)', 'Tiền khả dụng và lệnh rút về ngân hàng.'],
+    ['Invoices & tax (Hóa đơn, thuế)', 'Báo cáo và chứng từ để làm kế toán.']
+  ]],
+  ['cards', 'Công thức tính giá nên nhớ (Pricing formula)', [
+    ['Giá bán tối thiểu', 'Giá vốn + vận chuyển + phí sàn + hoa hồng affiliate + dự phòng hoàn hàng + lợi nhuận mong muốn.'],
+    ['Điều kiện nhận tiền', 'Tiền thường về sau khi đơn giao thành công và qua thời gian giữ tiền (reserve).']
+  ]],
+  ['ol', 'Đối soát hàng tuần (Weekly reconciliation)', [
+    'So tổng tiền nhận với số đơn đã giao.',
+    'Kiểm tra từng khoản phí có đúng không.',
+    'Ghi lại khoản hoàn tiền và nguyên nhân.',
+    'Lưu báo cáo cho kế toán và thuế.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common mistakes)', [
+    'Tính giá mà quên hoa hồng affiliate và hoàn hàng, bán nhiều vẫn lỗ.',
+    'Cho rằng tiền về ngay sau khi có đơn, dẫn đến thiếu vốn xoay vòng.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Payout', 'Thanh toán cho người bán', 'Tiền chuyển về ngân hàng.'],
+    ['Settlement', 'Đối soát', 'Bảng tính tiền cho từng đơn.'],
+    ['Reserve', 'Tiền giữ lại', 'Khoản bị giữ tạm theo chính sách.'],
+    ['Referral fee', 'Phí hoa hồng sàn', 'Phần trăm sàn thu trên mỗi đơn.'],
+    ['Reconciliation', 'Đối chiếu sổ sách', 'So khớp tiền nhận với đơn.'],
+    ['Margin', 'Biên lợi nhuận', 'Lợi nhuận ÷ giá bán.']
+  ]]
+]},
+
+{ id: 'partner', g: 'control', en: 'Partner', vi: 'Đối tác', lead: 'Danh bạ các đơn vị dịch vụ bên thứ ba mà TikTok giới thiệu, ví dụ đơn vị vận hành shop, nội dung, kho và giao hàng.', b: [
+  ['cards', 'Bạn có thể tìm (What you can find)', [
+    ['Operations partners (Đơn vị vận hành)', 'Hỗ trợ quản lý shop, đăng sản phẩm.'],
+    ['Content partners (Đơn vị làm nội dung)', 'Hỗ trợ quay dựng video, LIVE.'],
+    ['Logistics partners (Đơn vị kho, giao hàng)', 'Lưu kho và giao hàng tại Mỹ.']
+  ]],
+  ['ol', 'Kiểm tra trước khi thuê (Checklist before hiring)', [
+    'Chỉ chọn đối tác có trong danh sách chính thức của Seller Center.',
+    'Yêu cầu hợp đồng rõ ràng về công việc, phí và thời hạn.',
+    'Yêu cầu báo cáo định kỳ và quyền truy cập minh bạch.',
+    'Không giao mật khẩu tài khoản. Dùng cơ chế phân quyền nếu có.'
+  ]],
+  ['warn', 'Cảnh giác (Watch out)', [
+    'Lời hứa bao lên top, bao doanh số là dấu hiệu lừa đảo phổ biến.',
+    'Không ai đảm bảo được doanh số cố định cho shop.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Third-party', 'Bên thứ ba', 'Đơn vị ngoài TikTok và ngoài bạn.'],
+    ['Agency', 'Công ty dịch vụ', 'Đơn vị nhận vận hành thay.'],
+    ['Contract', 'Hợp đồng', 'Thỏa thuận bằng văn bản.']
+  ]]
+]},
+
+{ id: 'apps', g: 'control', en: 'Apps', vi: 'Ứng dụng', lead: 'Kho ứng dụng và tích hợp để nối Seller Center với phần mềm khác. Khi đơn nhiều, công cụ giúp tiết kiệm thời gian và giảm sai sót.', b: [
+  ['cards', 'Nhóm ứng dụng thường gặp (Common app types)', [
+    ['Order management (Quản lý đơn)', 'Gom đơn từ nhiều kênh vào một nơi.'],
+    ['Inventory sync (Đồng bộ tồn kho)', 'Tự trừ kho khi có đơn ở bất kỳ kênh nào.'],
+    ['Label printing (In nhãn hàng loạt)', 'In nhiều nhãn vận chuyển cùng lúc.'],
+    ['Customer service (Chăm sóc khách)', 'Quản lý tin nhắn và khiếu nại.']
+  ]],
+  ['tip', 'Khi nào cần (When to use)', [
+    'Đơn trên khoảng vài chục mỗi ngày.',
+    'Bán đồng thời nhiều nơi như TikTok Shop, Shopify, Amazon.'
+  ]],
+  ['warn', 'Lưu ý bảo mật (Security notes)', [
+    'Chỉ cài ứng dụng có đánh giá tốt và nhà phát triển rõ ràng.',
+    'Chỉ cấp quyền cần thiết và gỡ ứng dụng không còn dùng.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Integration', 'Tích hợp', 'Kết nối hai phần mềm.'],
+    ['API', 'Giao diện kết nối', 'Cách phần mềm trao đổi dữ liệu.'],
+    ['Permission', 'Quyền truy cập', 'Phạm vi ứng dụng được phép đọc hoặc sửa.']
+  ]]
+]},
+
+{ id: 'glossary', g: 'start', en: 'Glossary', vi: 'Từ điển thuật ngữ', lead: 'Toàn bộ thuật ngữ trong các tab, gom một chỗ. Gõ vào ô tìm để lọc theo tiếng Anh hoặc tiếng Việt.', b: [ ['gloss'] ] }
+];
+
+var GROUPS = [
+  ['start', 'Bắt đầu'],
+  ['ops', 'Operations (Vận hành)'],
+  ['traffic', 'Traffic & sales (Kéo khách, bán hàng)'],
+  ['control', 'Control (Kiểm soát)']
+];
+
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+function lsGet() { try { return JSON.parse(localStorage.getItem('sc-read') || '[]'); } catch (e) { return []; } }
+function lsSet(v) { try { localStorage.setItem('sc-read', JSON.stringify(v)); } catch (e) {} }
+
+var read = lsGet();
+var current = 'start';
+var tabsEl = document.getElementById('tabs');
+var docEl = document.getElementById('doc');
+
+function allTerms() {
+  var seen = {}, out = [];
+  DATA.forEach(function (s) {
+    s.b.forEach(function (blk) {
+      if (blk[0] === 'terms') {
+        blk[2].forEach(function (t) {
+          var k = t[0].toLowerCase();
+          if (!seen[k]) { seen[k] = 1; out.push({ en: t[0], vi: t[1], d: t[2], from: s.en }); }
+        });
+      }
+    });
+  });
+  out.sort(function (a, b) { return a.en.localeCompare(b.en); });
+  return out;
+}
+
+function renderTabs(filter) {
+  var f = (filter || '').trim().toLowerCase();
+  var html = '';
+  GROUPS.forEach(function (g) {
+    var items = DATA.filter(function (s) {
+      if (s.g !== g[0]) return false;
+      if (!f) return true;
+      return (s.en + ' ' + s.vi).toLowerCase().indexOf(f) !== -1;
+    });
+    if (!items.length) return;
+    html += '<div class="grp">' + esc(g[1]) + '</div>';
+    items.forEach(function (s) {
+      var color = s.g === 'start' ? 'var(--accent)' : 'var(--' + s.g + ')';
+      html += '<button class="tab' + (s.id === current ? ' on' : '') + (read.indexOf(s.id) !== -1 ? ' done' : '') + '" data-id="' + s.id + '" style="--g:' + color + '"' + (s.id === current ? ' aria-current="page"' : '') + '>' +
+        '<span><span class="en">' + esc(s.en) + '</span><span class="vi">' + esc(s.vi) + '</span></span><span class="dot" aria-hidden="true"></span></button>';
+    });
+  });
+  tabsEl.innerHTML = html || '<p style="color:var(--muted);font-size:14px">Không tìm thấy mục phù hợp.</p>';
+}
+
+function renderBlock(blk) {
+  var kind = blk[0], h = blk[1], items = blk[2];
+  if (kind === 'cards') {
+    return '<section class="blk"><h3>' + esc(h) + '</h3><div class="cards">' + items.map(function (c) {
+      return '<div class="card"><b>' + esc(c[0]) + '</b><span>' + esc(c[1]) + '</span></div>';
+    }).join('') + '</div></section>';
+  }
+  if (kind === 'ol') {
+    return '<section class="blk"><h3>' + esc(h) + '</h3><ol class="steps">' + items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ol></section>';
+  }
+  if (kind === 'tip' || kind === 'warn') {
+    return '<section class="blk note ' + kind + '"><h3>' + esc(h) + '</h3><ul>' + items.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join('') + '</ul></section>';
+  }
+  if (kind === 'terms') {
+    return '<section class="blk"><h3>' + esc(h) + '</h3><div class="tablewrap"><table><thead><tr><th>English</th><th>Tiếng Việt</th><th>Ý nghĩa</th></tr></thead><tbody>' +
+      items.map(function (t) { return '<tr><td class="en">' + esc(t[0]) + '</td><td>' + esc(t[1]) + '</td><td>' + esc(t[2]) + '</td></tr>'; }).join('') +
+      '</tbody></table></div></section>';
+  }
+  if (kind === 'gloss') {
+    return '<section class="blk"><input id="gloss-search" type="search" placeholder="Tìm thuật ngữ (ví dụ: voucher, hoa hồng)" aria-label="Tìm thuật ngữ"><div class="tablewrap"><table><thead><tr><th>English</th><th>Tiếng Việt</th><th>Ý nghĩa</th><th>Mục</th></tr></thead><tbody id="gloss-body"></tbody></table></div></section>';
+  }
+  return '';
+}
+
+function fillGloss(q) {
+  var f = (q || '').trim().toLowerCase();
+  var rows = allTerms().filter(function (t) { return !f || (t.en + ' ' + t.vi + ' ' + t.d).toLowerCase().indexOf(f) !== -1; });
+  document.getElementById('gloss-body').innerHTML = rows.length ? rows.map(function (t) {
+    return '<tr><td class="en">' + esc(t.en) + '</td><td>' + esc(t.vi) + '</td><td>' + esc(t.d) + '</td><td>' + esc(t.from) + '</td></tr>';
+  }).join('') : '<tr><td colspan="4">Không có thuật ngữ phù hợp.</td></tr>';
+}
+
+function updateProgress() {
+  var total = DATA.length;
+  var n = DATA.filter(function (s) { return read.indexOf(s.id) !== -1; }).length;
+  document.getElementById('prog-text').textContent = 'Đã đọc ' + n + '/' + total + ' mục';
+  document.getElementById('prog-bar').style.width = (n / total * 100) + '%';
+}
+
+function show(id, opts) {
+  var idx = DATA.findIndex(function (s) { return s.id === id; });
+  if (idx < 0) { idx = 0; id = DATA[0].id; }
+  var s = DATA[idx];
+  current = id;
+  if (read.indexOf(id) === -1) { read.push(id); lsSet(read); }
+  docEl.setAttribute('data-g', s.g);
+  var prev = DATA[idx - 1], next = DATA[idx + 1];
+  var groupName = (GROUPS.filter(function (g) { return g[0] === s.g; })[0] || [])[1] || '';
+  docEl.innerHTML =
+    '<span class="crumb">' + esc(groupName) + '</span>' +
+    '<h2 class="title">' + esc(s.en) + '</h2>' +
+    '<p class="vi-title">' + esc(s.vi) + '</p>' +
+    '<p class="lead">' + esc(s.lead) + '</p>' +
+    s.b.map(renderBlock).join('') +
+    '<div class="pager">' +
+      (prev ? '<button data-go="' + prev.id + '"><small>Mục trước</small>' + esc(prev.en) + ' (' + esc(prev.vi) + ')</button>' : '<span></span>') +
+      (next ? '<button data-go="' + next.id + '"><small>Mục tiếp theo</small>' + esc(next.en) + ' (' + esc(next.vi) + ')</button>' : '<span></span>') +
+    '</div>' +
+    '<p class="disclaimer">Tài liệu tự biên soạn để học, không phải tài liệu chính thức của TikTok. Tên mục, phí, ngưỡng điểm và chính sách có thể thay đổi. Hãy đối chiếu với Policy và Academy trong Seller Center trước khi áp dụng.</p>';
+  if (s.id === 'glossary') {
+    fillGloss('');
+    document.getElementById('gloss-search').addEventListener('input', function (e) { fillGloss(e.target.value); });
+  }
+  document.getElementById('menu-label').textContent = s.en + ' (' + s.vi + ')';
+  renderTabs(document.getElementById('search').value);
+  updateProgress();
+  if (!opts || !opts.silent) {
+    try { history.replaceState(null, '', '#' + id); } catch (e) {}
+    window.scrollTo({ top: 0 });
+  }
+  document.getElementById('index').classList.remove('open');
+  document.getElementById('menu-btn').setAttribute('aria-expanded', 'false');
+}
+
+tabsEl.addEventListener('click', function (e) {
+  var b = e.target.closest('.tab');
+  if (b) show(b.getAttribute('data-id'));
+});
+docEl.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-go]');
+  if (b) show(b.getAttribute('data-go'));
+});
+document.getElementById('search').addEventListener('input', function (e) { renderTabs(e.target.value); });
+document.getElementById('menu-btn').addEventListener('click', function () {
+  var nav = document.getElementById('index');
+  var open = nav.classList.toggle('open');
+  this.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+window.addEventListener('hashchange', function () {
+  var id = location.hash.replace('#', '');
+  if (id && id !== current) show(id, { silent: true });
+});
+
+show(location.hash.replace('#', '') || 'start', { silent: true });
+</script>
+
+</body>
+</html>
