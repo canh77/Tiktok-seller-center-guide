@@ -562,6 +562,86 @@ var DATA = [
   ]]
 ]},
 
+{ id: 'account-status', g: 'control', en: 'Live or dead check', vi: 'Kiểm tra tài khoản còn sống hay đã die', lead: 'Cách đọc trạng thái shop trong vài phút, dựa trên những gì Seller Center hiển thị, không cần đoán. Làm theo thứ tự các bước bên dưới.', b: [
+  ['cards', 'Các trạng thái thường gặp (Account statuses)', [
+    ['Live (Đang hoạt động)', 'Đăng nhập được, Orders và Products mở bình thường, không có banner đỏ, sản phẩm ở trạng thái Live và nhận được đơn.'],
+    ['Under review (Đang chờ duyệt)', 'Đăng ký hoặc xác minh chưa xong. Chưa bán được cho đến khi được duyệt.'],
+    ['Restricted (Bị hạn chế)', 'Shop còn sống nhưng mất một số quyền như đăng sản phẩm, chạy LIVE, chạy quảng cáo hoặc rút tiền. Lý do nằm trong Account health.'],
+    ['Suspended or Banned (Bị đình chỉ hoặc khóa)', 'Có thông báo khóa shop. Thường không còn dùng được các tính năng bán hàng. Đây là trường hợp gọi là die.'],
+    ['Deactivated or Closed (Đã đóng)', 'Shop bị đóng, do chủ shop đóng hoặc do hệ thống đóng sau vi phạm nặng.'],
+    ['Login failed (Không đăng nhập được)', 'Sai thông tin, cần khôi phục tài khoản. Chưa chắc là shop bị khóa.']
+  ]],
+  ['ol', 'Kiểm tra theo thứ tự (Step by step)', [
+    'Đăng nhập Seller Center và xem Home. Banner đỏ hoặc cam là dấu hiệu cần đọc ngay.',
+    'Mở Account health: đọc trạng thái shop, điểm vi phạm (violation points), lý do và thời hạn xử lý.',
+    'Mở Products: xem sản phẩm đang Live hay bị Deactivated hoặc Rejected.',
+    'Mở Orders: còn nhận và xử lý được đơn không, có đơn nào đang kẹt.',
+    'Mở hộp thư thông báo (Notifications, Inbox): tìm thông báo hạn chế hoặc khóa, thường ghi rõ lý do và hạn khiếu nại.',
+    'Nếu bị hạn chế hoặc khóa: chụp màn hình lý do, gom bằng chứng (ảnh đóng gói, hóa đơn, tin nhắn khách), rồi gửi Appeal đúng hạn.'
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Chụp màn hình trạng thái và lý do trước khi làm bất cứ thao tác nào.',
+    'Đọc điều khoản chính sách mà thông báo trích dẫn, rồi sửa đúng nguyên nhân trước khi khiếu nại.',
+    'Khi bị khóa, hãy khiếu nại hoặc liên hệ hỗ trợ. Mở shop mới bằng cùng danh tính hoặc thiết bị để lách khóa vi phạm chính sách và dễ bị khóa tiếp.'
+  ]],
+  ['warn', 'Dễ khiến shop bị xem xét (Risk signals)', [
+    'Đăng nhập nhiều tài khoản trên cùng một thiết bị.',
+    'IP, vị trí hoặc thiết bị đổi liên tục, không khớp thông tin đăng ký.',
+    'Mô tả sai sự thật, giao trễ, hủy đơn nhiều, hoặc đơn bị khiếu nại nhiều.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Live', 'Đang hoạt động', 'Shop bán được bình thường.'],
+    ['Under review', 'Đang chờ duyệt', 'Hồ sơ đang được kiểm tra.'],
+    ['Restricted', 'Bị hạn chế', 'Mất một số quyền của shop.'],
+    ['Suspended', 'Bị đình chỉ', 'Shop bị tạm khóa hoặc khóa.'],
+    ['Appeal', 'Khiếu nại', 'Yêu cầu xem xét lại quyết định.']
+  ]]
+]},
+
+{ id: 'money-status', g: 'control', en: 'Bank & payout check', vi: 'Kiểm tra ngân hàng và tiền về', lead: 'Trả lời hai câu hỏi: shop đã liên kết ngân hàng chưa, và tiền đã về hay còn đang giữ. Cả hai đều xem ở mục Finances.', b: [
+  ['cards', 'Tình trạng ngân hàng (Bank account status)', [
+    ['Not added (Chưa add)', 'Mục Bank accounts trống hoặc chỉ có nút thêm tài khoản. Chưa rút được tiền.'],
+    ['Pending verification (Đã add, chờ duyệt)', 'Đã nhập thông tin nhưng chưa được xác minh. Chưa rút được.'],
+    ['Verified (Đã add, đã xác minh)', 'Hiện tên ngân hàng và vài số cuối tài khoản. Có thể rút tiền khi có số dư khả dụng.'],
+    ['Rejected (Bị từ chối)', 'Thường do tên chủ tài khoản không khớp với chủ shop hoặc pháp nhân, hoặc nhập sai thông tin.']
+  ]],
+  ['cards', 'Tình trạng tiền (Money status)', [
+    ['Available balance (Số dư khả dụng)', 'Tiền rút được ngay (khi đã có ngân hàng được xác minh).'],
+    ['Pending or Unsettled (Chờ đối soát)', 'Đơn chưa giao xong hoặc còn trong thời gian đổi trả. Chưa tính vào số dư rút được.'],
+    ['Reserve (Tiền giữ lại)', 'Khoản TikTok giữ tạm theo chính sách, thường với shop mới, rủi ro cao hoặc có vi phạm, khiếu nại.'],
+    ['Processing (Đang chuyển)', 'Lệnh rút đã tạo, tiền đang trên đường về ngân hàng.'],
+    ['Completed (Đã về)', 'Tiền đã chuyển đi thành công. Ngân hàng có thể cần thêm vài ngày làm việc để ghi có.'],
+    ['Failed (Chuyển lỗi)', 'Lệnh rút không thành công, hay gặp khi thông tin ngân hàng sai hoặc không khớp tên.']
+  ]],
+  ['ol', 'Cách kiểm tra (Step by step)', [
+    'Mở Finances, xem Overview: số dư khả dụng, số tiền chờ đối soát, tiền bị giữ.',
+    'Mở mục tài khoản ngân hàng (Bank accounts hoặc Withdrawal accounts): xem đã có tài khoản chưa và trạng thái là gì.',
+    'Mở Statements hoặc Settlements: từng đơn đang Settled (đã đối soát) hay Pending.',
+    'Mở lịch sử rút tiền (Withdrawal history): lệnh nào Processing, Completed hay Failed.',
+    'Đối chiếu số tiền về với sao kê ngân hàng của bạn.'
+  ]],
+  ['tip', 'Vì sao tiền có thể đang bị giữ (Why money is held)', [
+    'Đơn chưa giao xong hoặc chưa hết thời gian đổi trả.',
+    'Shop mới thường có khoản Reserve hoặc chu kỳ thanh toán dài hơn.',
+    'Đang có khiếu nại, tranh chấp hoặc vi phạm chưa xử lý.',
+    'Chưa add ngân hàng, hoặc ngân hàng chưa được xác minh.',
+    'Shop đang bị hạn chế hoặc đình chỉ nên việc rút tiền bị chặn.'
+  ]],
+  ['warn', 'Lưu ý (Notes)', [
+    'Tên chủ tài khoản ngân hàng phải khớp với thông tin đăng ký của shop.',
+    'Tiền chưa về chưa có nghĩa là mất. Hãy kiểm tra trạng thái từng đơn trước.',
+    'Thời gian đối soát và mức giữ tiền thay đổi theo chính sách. Hãy đối chiếu Policy hiện hành trong Seller Center.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Available balance', 'Số dư khả dụng', 'Tiền có thể rút.'],
+    ['Pending', 'Đang chờ', 'Chưa đủ điều kiện thanh toán.'],
+    ['Settled', 'Đã đối soát', 'Đơn đã được tính tiền cho shop.'],
+    ['Withdrawal', 'Rút tiền', 'Chuyển tiền từ shop về ngân hàng.'],
+    ['Verified', 'Đã xác minh', 'Thông tin ngân hàng được chấp nhận.'],
+    ['Bank account', 'Tài khoản ngân hàng', 'Nơi nhận tiền.']
+  ]]
+]},
+
 { id: 'partner', g: 'control', en: 'Partner', vi: 'Đối tác', lead: 'Danh bạ các đơn vị dịch vụ bên thứ ba mà TikTok giới thiệu, ví dụ đơn vị vận hành shop, nội dung, kho và giao hàng.', b: [
   ['cards', 'Bạn có thể tìm (What you can find)', [
     ['Operations partners (Đơn vị vận hành)', 'Hỗ trợ quản lý shop, đăng sản phẩm.'],
