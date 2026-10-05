@@ -184,6 +184,46 @@ var DATA = [
   ]]
 ]},
 
+{ id: 'account-type', g: 'start', en: 'Shop or marketing channel', vi: 'Tài khoản này là shop hay kênh marketing', lead: 'Trước khi đọc trạng thái, hãy xác định bạn đang nhìn loại tài khoản nào. Mỗi loại có trang quản lý, cách tính trạng thái và dòng tiền khác nhau, nên nhầm loại sẽ đọc sai kết quả.', b: [
+  ['cards', 'Bốn loại tài khoản hay bị nhầm (Account types)', [
+    ['Shop, Seller account (Tài khoản bán hàng)', 'Quản lý ở Seller Center (địa chỉ seller-us.tiktok.com). Có Orders, Products, Logistics, Finances. Bán hàng và nhận tiền từ đơn.'],
+    ['Ads account, Marketing channel (Tài khoản quảng cáo)', 'Quản lý ở TikTok Ads Manager, thuộc TikTok for Business (thường là ads.tiktok.com). Có Campaign, Ad group, Ads, Billing. Bạn trả tiền để chạy quảng cáo, không có đơn hay tiền bán hàng.'],
+    ['Content channel, Creator account (Kênh nội dung)', 'Tài khoản TikTok thường trong app: hồ sơ, video, người theo dõi. Có thể gắn giỏ hàng nếu liên kết với shop hoặc làm affiliate.'],
+    ['Affiliate (Cộng tác viên bán hộ)', 'Quản lý ở Affiliate Center của TikTok Shop. Bán sản phẩm của shop khác và nhận hoa hồng. Không có kho, sản phẩm hay đơn hàng riêng.']
+  ]],
+  ['ol', 'Phân biệt trong một phút (How to tell)', [
+    'Nhìn địa chỉ trang trên thanh trình duyệt: seller-us là shop, ads là tài khoản quảng cáo.',
+    'Nhìn menu bên trái: có Orders, Products, Logistics, Finances thì là shop. Có Campaign, Ad group, Creative, Billing thì là tài khoản quảng cáo.',
+    'Nhìn dòng tiền: tiền vào qua Payout (rút về ngân hàng) là shop hoặc affiliate. Tiền ra qua Billing hoặc Balance (nạp tiền, trả tiền quảng cáo) là tài khoản quảng cáo.',
+    'Tự hỏi: tài khoản này có sản phẩm, kho, đơn không? Có thì là shop. Không có mà chỉ có video và người theo dõi thì là kênh nội dung.',
+    'Trong Seller Center, mục Marketing chỉ là công cụ quảng cáo và khuyến mãi của shop, không phải một tài khoản marketing riêng.'
+  ]],
+  ['cards', 'Kiểm tra live hay die theo từng loại (Status check by type)', [
+    ['Shop', 'Xem Account health và Finances. Chi tiết ở tab Live or dead check và Bank & payout check.'],
+    ['Ads account', 'Xem trạng thái tài khoản (Active, Under review, Disabled), mục Billing đã có phương thức thanh toán chưa, số dư, và quảng cáo có bị từ chối (Ad rejected) không.'],
+    ['Content channel', 'Mở app TikTok, xem hồ sơ có bị cảnh báo hoặc hạn chế, video có bị gỡ, và thông báo vi phạm trong hộp thư.'],
+    ['Affiliate', 'Xem tình trạng cộng tác, hoa hồng đang chờ (pending commission) và hoa hồng đã thanh toán.']
+  ]],
+  ['tip', 'Mẹo (Tips)', [
+    'Một người có thể có nhiều loại cùng lúc, ví dụ một shop, một tài khoản quảng cáo và một kênh nội dung gắn với nhau. Hãy kiểm tra từng cái riêng.',
+    'Tài khoản quảng cáo có thể được liên kết với shop để chạy quảng cáo cho sản phẩm. Khi shop có vấn đề, quảng cáo cũng bị ảnh hưởng.',
+    'Ghi lại trong một bảng: tên tài khoản, loại, trang đăng nhập, trạng thái, ngày kiểm tra gần nhất.'
+  ]],
+  ['warn', 'Dễ nhầm (Common confusions)', [
+    'Thấy tiền quảng cáo bị trừ rồi tưởng là phí của shop. Hai khoản nằm ở hai nơi khác nhau.',
+    'Kênh nội dung có nhiều lượt xem nhưng chưa chắc là shop đang live.',
+    'Không dùng chung đăng nhập hay chia sẻ mật khẩu giữa các loại tài khoản. Hãy dùng chức năng phân quyền thành viên (team access) nếu có.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Seller Center', 'Trung tâm người bán', 'Trang quản lý shop TikTok Shop.'],
+    ['Ads Manager', 'Trình quản lý quảng cáo', 'Trang tạo và theo dõi quảng cáo.'],
+    ['Campaign', 'Chiến dịch', 'Nhóm quảng cáo cùng mục tiêu.'],
+    ['Billing', 'Thanh toán, hóa đơn', 'Nơi nạp tiền và trả phí quảng cáo.'],
+    ['Creator account', 'Tài khoản người sáng tạo', 'Kênh nội dung trên TikTok.'],
+    ['Team access', 'Phân quyền thành viên', 'Cho người khác vào quản lý mà không đưa mật khẩu.']
+  ]]
+]},
+
 { id: 'home', g: 'ops', en: 'Home', vi: 'Trang chủ', lead: 'Trang đầu tiên hiện ra sau khi đăng nhập. Hãy xem nó như bảng đồng hồ của một chiếc xe: liếc qua là biết shop đang ổn hay có vấn đề.', b: [
   ['cards', 'Chức năng chính (Main features)', [
     ['Doanh thu hôm nay (Today sales)', 'Số tiền và số đơn phát sinh trong ngày, so với hôm qua.'],
