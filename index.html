@@ -185,6 +185,76 @@ var DATA = [
   ]]
 ]},
 
+{ id: 'seller-verification', g: 'start', en: 'Seller registration & verification', vi: 'Đăng ký và xác minh người bán', lead: 'Khi mở shop US, TikTok kiểm tra danh tính, doanh nghiệp, thuế, địa chỉ và ngân hàng của người bán. Mọi thông tin phải là thật và khớp nhau giữa giấy tờ, hồ sơ đăng ký và tài khoản ngân hàng.', b: [
+  ['cards', 'Chọn loại người bán (Seller type)', [
+    ['Individual (Cá nhân)', 'Người có danh tính và thuế tại Mỹ, bán hàng dưới tên riêng của mình.'],
+    ['Business (Doanh nghiệp)', 'Pháp nhân tại Mỹ như LLC, Corporation, hoặc hộ kinh doanh có đăng ký DBA.'],
+    ['Cross-border (Xuyên biên giới)', 'Doanh nghiệp ngoài Mỹ bán vào Mỹ qua chương trình riêng, chỉ khi TikTok mở cho quốc gia đó. Điều kiện và giấy tờ khác với người bán nội địa.']
+  ]],
+  ['cards', 'Giấy tờ cho người bán cá nhân (Individual documents)', [
+    ['Giấy tờ tùy thân (Government ID)', 'Bằng lái xe, hộ chiếu hoặc thẻ căn cước tiểu bang của Mỹ. Chụp đủ toàn bộ giấy tờ.'],
+    ['Họ tên và ngày sinh (Legal name, Date of birth)', 'Nhập đúng từng chữ như trên giấy tờ.'],
+    ['Mã số thuế (SSN hoặc ITIN)', 'Dùng để xác minh danh tính và khai thuế.'],
+    ['Chứng minh địa chỉ (Proof of address)', 'Địa chỉ cư trú hiện tại tại Mỹ, khớp với hồ sơ ngân hàng.'],
+    ['Mẫu thuế W-9', 'Khai trong quá trình đăng ký để TikTok báo cáo thu nhập.'],
+    ['Tài khoản ngân hàng (Bank account)', 'Tài khoản ngân hàng Mỹ đứng tên chính bạn.']
+  ]],
+  ['cards', 'Giấy tờ cho doanh nghiệp (Business documents)', [
+    ['EIN (Mã số thuế doanh nghiệp)', 'Thường chứng minh bằng thư hoặc thông báo của IRS có tên doanh nghiệp và số EIN.'],
+    ['Giấy tờ thành lập (Formation documents)', 'Articles of Incorporation hoặc Articles of Organization, chứng nhận LLC, hoặc đăng ký DBA do tiểu bang cấp.'],
+    ['Người đại diện (Business representative)', 'Giấy tờ tùy thân và thông tin của người đứng ra đăng ký thay doanh nghiệp.'],
+    ['Địa chỉ doanh nghiệp (Business address)', 'Địa chỉ chính của doanh nghiệp, khớp với giấy tờ đăng ký.'],
+    ['Mẫu thuế W-9', 'Khai bằng EIN của doanh nghiệp.'],
+    ['Ngân hàng doanh nghiệp (Business bank account)', 'Tài khoản đứng tên đúng pháp nhân đã đăng ký.']
+  ]],
+  ['ol', 'Các bước đăng ký (Step by step)', [
+    'Vào seller-us.tiktok.com, đăng ký bằng email, số điện thoại hoặc tài khoản TikTok.',
+    'Chọn loại người bán: Individual hoặc Business.',
+    'Nhập thông tin cá nhân hoặc doanh nghiệp đúng như trên giấy tờ.',
+    'Tải giấy tờ lên: JPG, PNG hoặc PDF, mỗi file dưới 10MB, chụp đủ toàn bộ, chữ rõ.',
+    'Khai thông tin thuế: W-9 cùng SSN, ITIN hoặc EIN.',
+    'Thêm địa chỉ kho và địa chỉ hoàn hàng.',
+    'Liên kết tài khoản ngân hàng nhận tiền, tên chủ tài khoản phải khớp với hồ sơ.',
+    'Bấm Submit và chờ duyệt. Các nguồn tham khảo cho biết thường khoảng 48 giờ, có thể lâu hơn.',
+    'Nếu được yêu cầu bổ sung, nộp đúng giấy tờ được hỏi và trong thời hạn.'
+  ]],
+  ['cards', 'Trạng thái hồ sơ (Application status)', [
+    ['Under review (Đang duyệt)', 'Hồ sơ đang được kiểm tra. Chưa bán được.'],
+    ['Approved (Đã duyệt)', 'Shop được mở. Tiếp tục thiết lập Logistics và đăng sản phẩm.'],
+    ['Need more information (Cần bổ sung)', 'Thiếu giấy tờ hoặc giấy tờ chưa rõ. Đọc yêu cầu và nộp lại.'],
+    ['Rejected (Bị từ chối)', 'Thường do thông tin không khớp, giấy tờ hết hạn hoặc không hợp lệ. Đọc lý do trước khi nộp lại.']
+  ]],
+  ['tip', 'Mẹo để được duyệt nhanh (Tips)', [
+    'Họ tên, tên doanh nghiệp và địa chỉ phải khớp từng chữ giữa giấy tờ, hồ sơ và ngân hàng.',
+    'Chụp giấy tờ dưới ánh sáng đều, thấy đủ bốn góc, không bị lóa hay mờ.',
+    'Giấy tờ phải còn hạn. Kiểm tra ngày hết hạn trước khi nộp.',
+    'Lưu bản sao toàn bộ hồ sơ đã nộp để dùng khi cần khiếu nại hoặc bổ sung.'
+  ]],
+  ['warn', 'Quan trọng (Important)', [
+    'Không dùng danh tính, giấy tờ, SSN hay tài khoản ngân hàng của người khác, và không mua hoặc thuê tài khoản. Việc này vi phạm chính sách của TikTok, có thể vi phạm pháp luật, và dẫn đến khóa shop, giữ tiền.',
+    'Người ở ngoài Mỹ không có SSN, ITIN hoặc pháp nhân Mỹ thì không đăng ký được dạng người bán nội địa. Cách hợp lệ là lập pháp nhân tại Mỹ đúng luật (ví dụ LLC có EIN và tài khoản ngân hàng doanh nghiệp), hoặc dùng chương trình cross-border chính thức nếu có. Nên hỏi kế toán hoặc luật sư về thuế trước khi làm.',
+    'Yêu cầu giấy tờ thay đổi theo thời gian. Luôn đọc màn hình đăng ký và Seller Academy để biết yêu cầu hiện hành.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['SSN (Social Security Number)', 'Số an sinh xã hội', 'Mã số cá nhân tại Mỹ, dùng cho thuế.'],
+    ['ITIN', 'Mã số thuế cá nhân', 'Cấp cho người không đủ điều kiện có SSN.'],
+    ['EIN (Employer Identification Number)', 'Mã số thuế doanh nghiệp', 'Do IRS cấp cho doanh nghiệp.'],
+    ['W-9', 'Mẫu khai thông tin thuế', 'Mẫu cung cấp mã số thuế cho bên trả tiền.'],
+    ['LLC', 'Công ty trách nhiệm hữu hạn', 'Loại hình doanh nghiệp phổ biến tại Mỹ.'],
+    ['DBA (Doing Business As)', 'Tên thương mại', 'Tên kinh doanh đăng ký khác tên pháp lý.'],
+    ['Articles of Incorporation', 'Điều lệ thành lập công ty', 'Giấy tờ thành lập do tiểu bang cấp.'],
+    ['Business representative', 'Người đại diện doanh nghiệp', 'Người đứng ra đăng ký thay doanh nghiệp.'],
+    ['Proof of address', 'Giấy tờ chứng minh địa chỉ', 'Hóa đơn tiện ích, sao kê ngân hàng và giấy tờ tương tự.'],
+    ['Legal name', 'Tên pháp lý', 'Tên đúng như trên giấy tờ.']
+  ]],
+  ['links', 'Nguồn tham khảo (bên thứ ba, cần đối chiếu với Seller Center)', [
+    ['Understanding TikTok Shop Seller Requirements (Emplicit)', 'https://emplicit.co/understanding-tiktok-shop-seller-requirements-a-comprehensive-guide/'],
+    ['How to register as a TikTok Shop individual seller in the US (Racklify)', 'https://racklify.com/encyclopedia/how-to-register-as-a-tiktok-shop-individual-seller-in-the-us-steps-documents/'],
+    ['TikTok Shop Seller Requirements (MDS)', 'https://www.mds.co/blog/tiktok-shop-seller-requirements'],
+    ['How do I set up a TikTok Shop US account? (Printify)', 'https://help.printify.com/hc/en-us/articles/18312474590481-How-do-I-set-up-a-TikTok-Shop-US-account']
+  ]]
+]},
+
 { id: 'account-type', g: 'start', en: 'Shop or marketing channel', vi: 'Tài khoản này là shop hay kênh marketing', lead: 'Trước khi đọc trạng thái, hãy xác định bạn đang nhìn loại tài khoản nào. Mỗi loại có trang quản lý, cách tính trạng thái và dòng tiền khác nhau, nên nhầm loại sẽ đọc sai kết quả.', b: [
   ['cards', 'Bốn loại tài khoản hay bị nhầm (Account types)', [
     ['Shop, Seller account (Tài khoản bán hàng)', 'Quản lý ở Seller Center (địa chỉ seller-us.tiktok.com). Có Orders, Products, Logistics, Finances. Bán hàng và nhận tiền từ đơn.'],
