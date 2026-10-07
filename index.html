@@ -108,6 +108,7 @@ ol.steps li { counter-increment: s; position: relative; padding-left: 38px; max-
 ol.steps li::before { content: counter(s); position: absolute; left: 0; top: 2px; width: 26px; height: 26px; border-radius: 50%; background: var(--gbg); color: var(--g); display: grid; place-items: center; font-size: 13px; font-weight: 600; }
 ul.plain { margin: 0; padding-left: 20px; max-width: 70ch; }
 ul.plain li { margin-bottom: 6px; }
+.links a { color: var(--accent); text-underline-offset: 2px; overflow-wrap: anywhere; }
 .note { border-radius: 8px; padding: 14px 16px; background: var(--gbg); }
 .note.warn { background: var(--warn-bg); }
 .note h3 { color: var(--g); }
@@ -682,6 +683,106 @@ var DATA = [
   ]]
 ]},
 
+{ id: 'business-center', g: 'control', en: 'Business Center (BC)', vi: 'Trung tâm doanh nghiệp', lead: 'Business Center là nơi gom các tài sản quảng cáo của một doanh nghiệp (shop, kênh TikTok, tài khoản quảng cáo) về một chỗ và phân quyền cho từng thành viên. Khi người ta nói bu hay add một tài khoản vào BC, nghĩa là liên kết tài khoản đó vào BC.', b: [
+  ['cards', 'BC khác Seller Center thế nào (BC vs Seller Center)', [
+    ['Seller Center (Trung tâm người bán)', 'Quản lý một shop: đơn hàng, sản phẩm, vận chuyển, tiền. Địa chỉ seller-us.tiktok.com.'],
+    ['Business Center (Trung tâm doanh nghiệp)', 'Quản lý tài sản và quyền truy cập: shop, TikTok accounts, ad accounts, thành viên. Địa chỉ business.tiktok.com.']
+  ]],
+  ['ol', 'Cách 1: thêm kênh TikTok vào BC (Add a TikTok account)', [
+    'Đăng nhập business.tiktok.com. Ở menu trái chọn Accounts (hoặc Assets), rồi TikTok accounts.',
+    'Bấm Add TikTok account, rồi chọn một trong hai cách.',
+    'Add owned account (thêm kênh thuộc sở hữu): BC trở thành chủ kênh. Bạn đăng nhập hoặc quét mã QR bằng chính TikTok account đó để xác nhận.',
+    'Request ad delivery permissions (xin quyền chạy quảng cáo): chỉ xin quyền dùng kênh để chạy ads, hay dùng với kênh của KOC hoặc KOL. Nhập username, gửi yêu cầu, chủ kênh vào app TikTok bấm duyệt.',
+    'Mỗi BC xin quyền được tối đa 200 TikTok accounts (con số theo hướng dẫn hiện hành, có thể thay đổi).'
+  ]],
+  ['ol', 'Cách 2: thêm TikTok Shop vào BC (Add a shop)', [
+    'Vào BC, chọn Accounts, rồi Shops, rồi Add shop.',
+    'Chọn Request access to TikTok Shop partners.',
+    'Nhập Shop code (lấy trong Seller Center, phần thông tin shop) rồi bấm Request.',
+    'Email sẽ gửi cho owner hoặc admin của shop. Khi họ duyệt, shop được kết nối vào BC.',
+    'Tính năng này hỗ trợ shop US với BC đăng ký tại US và với BC thường trên toàn cầu.'
+  ]],
+  ['ol', 'Cách 3: cho kênh marketing chạy GMV Max hoặc Shop Ads (làm từ Seller Center)', [
+    'Vào Seller Center US, chọn Marketing, rồi Shop Ads.',
+    'Chọn Manage account, rồi Marketing TikTok accounts.',
+    'Tìm kênh cần thêm và bấm Get permission.',
+    'Hệ thống tạo mã QR. Chủ kênh quét mã bằng app TikTok để cấp quyền.'
+  ]],
+  ['tip', 'Điều kiện cần (Requirements)', [
+    'Tài khoản của bạn trong BC phải có quyền Admin, nếu không sẽ không thấy nút Add.',
+    'Shop US nên đi với BC và ad account có khu vực là US. Lệch khu vực thường báo lỗi không link được.',
+    'Người sở hữu shop hoặc kênh phải sẵn sàng duyệt yêu cầu bằng email hoặc app TikTok.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common errors)', [
+    'Báo account already bound to another BC (tài khoản đã gắn với BC khác): phải gỡ kênh hoặc shop khỏi BC cũ trước rồi mới thêm vào BC mới.',
+    'Không thấy nút Add: tài khoản của bạn chưa có quyền Admin trong BC.',
+    'Yêu cầu bị treo: chủ shop hoặc chủ kênh chưa duyệt. Nhắc họ kiểm tra email và app.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Business Center (BC)', 'Trung tâm doanh nghiệp', 'Nơi quản lý tài sản và phân quyền.'],
+    ['Admin', 'Quản trị viên', 'Quyền cao nhất, thêm hoặc gỡ tài sản.'],
+    ['Shop code', 'Mã shop', 'Mã nhận diện shop, lấy trong Seller Center.'],
+    ['Owned account', 'Tài khoản thuộc sở hữu', 'Kênh do BC làm chủ.'],
+    ['Ad delivery permission', 'Quyền chạy quảng cáo', 'Quyền dùng kênh của người khác để chạy ads.'],
+    ['Ad account', 'Tài khoản quảng cáo', 'Nơi tạo chiến dịch và trả phí quảng cáo.'],
+    ['Marketing account', 'Kênh marketing', 'Kênh TikTok dùng để chạy quảng cáo cho shop.'],
+    ['GMV Max', 'Quảng cáo tối ưu doanh số', 'Dạng quảng cáo cho shop trên TikTok Shop.'],
+    ['Shop Ads', 'Quảng cáo cho shop', 'Quảng cáo quản lý từ Seller Center.']
+  ]],
+  ['links', 'Nguồn tham khảo chính thức (Official sources)', [
+    ['Requesting TikTok Shop access in Business Center', 'https://ads.tiktok.com/help/article/requesting-tiktok-shop-access-business-center?lang=en'],
+    ['Request ad delivery permissions for a TikTok account', 'https://ads.tiktok.com/help/article/how-to-request-tiktok-account-ad-delivery-permissions-in-business-center?lang=vi'],
+    ['Manage TikTok accounts in Business Center', 'https://ads.tiktok.com/help/article/manage-tiktok-accounts-business-center?lang=en'],
+    ['Request ads authorization from a marketing account', 'https://ads.tiktok.com/help/article/how-to-request-ads-authorization-from-marketing-account?lang=en'],
+    ['Manage account permissions in Seller Center', 'https://ads.tiktok.com/help/article/manage-account-permissions-in-seller-center']
+  ]]
+]},
+
+{ id: 'verify-business', g: 'control', en: 'Verify business', vi: 'Xác minh doanh nghiệp', lead: 'Business verification (xác minh doanh nghiệp) là bước chứng minh với TikTok rằng bạn là một doanh nghiệp thật, bằng giấy tờ đăng ký kinh doanh. Kết quả hiện ra là Verified (đã xác minh) hoặc Unverified (chưa xác minh).', b: [
+  ['cards', 'Phân biệt hai việc dễ nhầm (Do not mix up)', [
+    ['Xác minh khi đăng ký bán hàng (Seller verification)', 'Làm trong Seller Center khi mở shop: danh tính chủ shop, doanh nghiệp, ngân hàng. Quyết định shop có bán được và nhận tiền không.'],
+    ['Xác minh doanh nghiệp ở Business Center hoặc Ads Manager (Business verification)', 'Làm cho tài khoản quảng cáo và BC. Dùng để chứng minh doanh nghiệp thật khi chạy quảng cáo. Là hai quy trình khác nhau.']
+  ]],
+  ['ol', 'Các bước xác minh trong BC (Step by step)', [
+    'Từ Business Center, chọn ad account cần xác minh, rồi bấm Go to account settings ở góc trên bên phải.',
+    'Bấm Verify now.',
+    'Chọn Entity type (loại hình doanh nghiệp), nhập quốc gia, tên doanh nghiệp và website của công ty (không bắt buộc).',
+    'Tải lên bản số hóa của giấy tờ xác minh và nhập số giấy phép hoặc số chứng nhận (certificate number).',
+    'Bấm Submit.',
+    'Theo dõi trạng thái trong Ads Manager. Được duyệt thì tài khoản ghi Verified, bị từ chối thì ghi Unverified.'
+  ]],
+  ['cards', 'Yêu cầu với giấy tờ (Document requirements)', [
+    ['Định dạng và dung lượng', 'JPEG, JPG, PNG hoặc PDF. Mỗi file không quá 10MB.'],
+    ['Hình ảnh rõ ràng', 'Thấy đủ bốn góc, chữ đọc rõ, có số giấy phép hoặc số chứng nhận.'],
+    ['Màu sắc', 'Giấy tờ phải là bản màu (trừ Mỹ, Trung Quốc, Úc theo hướng dẫn hiện hành).'],
+    ['Thời hạn', 'Còn hiệu lực và không hết hạn trong 30 ngày sau khi tải lên.'],
+    ['Tính xác thực', 'Không trùng lặp bản sao, không có watermark của bên thứ ba, phải là giấy tờ thật.']
+  ]],
+  ['tip', 'Mẹo để được duyệt (Tips)', [
+    'Tên doanh nghiệp, quốc gia và loại hình nhập vào phải khớp từng chữ với giấy tờ.',
+    'Quét hoặc chụp bằng ánh sáng đều, không che góc, không dùng ảnh chụp màn hình bị mờ.',
+    'Giữ thông tin nhất quán giữa Seller Center, BC và ngân hàng nhận tiền.',
+    'Nếu bị từ chối, đọc lý do, sửa đúng chỗ, rồi nộp lại.'
+  ]],
+  ['warn', 'Lưu ý (Notes)', [
+    'Không dùng giấy tờ của người khác hoặc giấy tờ đã chỉnh sửa. Bị phát hiện có thể khiến tài khoản bị khóa.',
+    'Yêu cầu giấy tờ khác nhau theo quốc gia và loại hình. Luôn đối chiếu trang hướng dẫn chính thức trước khi nộp.',
+    'Xác minh doanh nghiệp không đảm bảo quảng cáo luôn được duyệt. Quảng cáo vẫn phải tuân thủ chính sách.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Business verification', 'Xác minh doanh nghiệp', 'Chứng minh doanh nghiệp là thật.'],
+    ['Entity type', 'Loại hình doanh nghiệp', 'Công ty, hộ kinh doanh, cá nhân và các loại khác.'],
+    ['Business license', 'Giấy phép kinh doanh', 'Giấy tờ đăng ký doanh nghiệp.'],
+    ['Certificate number', 'Số chứng nhận', 'Số ghi trên giấy phép.'],
+    ['Verified', 'Đã xác minh', 'Hồ sơ được chấp nhận.'],
+    ['Unverified', 'Chưa xác minh', 'Chưa nộp hoặc bị từ chối.']
+  ]],
+  ['links', 'Nguồn tham khảo chính thức (Official sources)', [
+    ['How to verify your business on TikTok', 'https://ads.tiktok.com/help/article/about-business-verification?lang=en'],
+    ['Uploading documents for advertisers on TikTok', 'https://ads.tiktok.com/help/article/uploading-documents-for-advertisers-on-tiktok?lang=pl-PL']
+  ]]
+]},
+
 { id: 'partner', g: 'control', en: 'Partner', vi: 'Đối tác', lead: 'Danh bạ các đơn vị dịch vụ bên thứ ba mà TikTok giới thiệu, ví dụ đơn vị vận hành shop, nội dung, kho và giao hàng.', b: [
   ['cards', 'Bạn có thể tìm (What you can find)', [
     ['Operations partners (Đơn vị vận hành)', 'Hỗ trợ quản lý shop, đăng sản phẩm.'],
@@ -799,6 +900,11 @@ function renderBlock(blk) {
     return '<section class="blk"><h3>' + esc(h) + '</h3><div class="tablewrap"><table><thead><tr><th>English</th><th>Tiếng Việt</th><th>Ý nghĩa</th></tr></thead><tbody>' +
       items.map(function (t) { return '<tr><td class="en">' + esc(t[0]) + '</td><td>' + esc(t[1]) + '</td><td>' + esc(t[2]) + '</td></tr>'; }).join('') +
       '</tbody></table></div></section>';
+  }
+  if (kind === 'links') {
+    return '<section class="blk"><h3>' + esc(h) + '</h3><ul class="plain links">' + items.map(function (l) {
+      return '<li><a href="' + esc(l[1]) + '" target="_blank" rel="noopener noreferrer">' + esc(l[0]) + '</a></li>';
+    }).join('') + '</ul></section>';
   }
   if (kind === 'gloss') {
     return '<section class="blk"><input id="gloss-search" type="search" placeholder="Tìm thuật ngữ (ví dụ: voucher, hoa hồng)" aria-label="Tìm thuật ngữ"><div class="tablewrap"><table><thead><tr><th>English</th><th>Tiếng Việt</th><th>Ý nghĩa</th><th>Mục</th></tr></thead><tbody id="gloss-body"></tbody></table></div></section>';
