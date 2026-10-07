@@ -610,35 +610,60 @@ var DATA = [
   ]]
 ]},
 
-{ id: 'account-health', g: 'control', en: 'Account health', vi: 'Sức khỏe tài khoản', lead: 'Cho biết shop có đang tuân thủ chính sách hay không. Điểm thấp có thể bị giảm hiển thị, hạn chế tính năng hoặc khóa shop, nên hãy mở mục này hằng ngày.', b: [
-  ['cards', 'Thường gồm (Typically includes)', [
-    ['Shop performance (Hiệu suất shop)', 'Điểm tổng hợp từ giao hàng, đánh giá, chăm sóc khách.'],
-    ['Violation points (Điểm vi phạm)', 'Điểm bị trừ vì vi phạm chính sách, có hạn dùng và mức xử lý.'],
-    ['Product violations (Vi phạm sản phẩm)', 'Sản phẩm bị từ chối, gỡ, hoặc cần chỉnh.'],
-    ['Fulfillment metrics (Chỉ số giao hàng)', 'Tỉ lệ giao trễ, tỉ lệ hủy đơn do shop.'],
-    ['Customer service (Chăm sóc khách)', 'Thời gian phản hồi tin nhắn, tỉ lệ khiếu nại.'],
-    ['Appeal (Khiếu nại)', 'Cách phản hồi khi cho rằng bị phạt sai.']
+{ id: 'account-health', g: 'control', en: 'Account health', vi: 'Sức khỏe tài khoản', lead: 'Trang chính trong mục này tên là Account health rating (Điểm sức khỏe tài khoản). Nó cho biết shop đang ở trạng thái nào, bị vi phạm gì và đang chịu hình phạt nào. Nếu shop bị khóa, một banner đỏ Account deactivated sẽ hiện ở đầu mọi trang.', b: [
+  ['cards', 'Bốn tab trong Account health rating (Tabs)', [
+    ['Overview (Tổng quan)', 'Trạng thái shop (ví dụ Suspended), thanh điểm từ 0 đến 1000 với mức mặc định 200 (Default), mục Action needed và Metric performance.'],
+    ['Violation records (Hồ sơ vi phạm)', 'Danh sách vi phạm kèm hình phạt, lý do, ngày, trạng thái. Đây là chỗ quan trọng nhất khi shop gặp vấn đề.'],
+    ['Warning records (Hồ sơ cảnh báo)', 'Cảnh báo chưa thành vi phạm. Xử lý sớm để không bị trừ điểm.'],
+    ['Learning center (Trung tâm học)', 'Bài học về chính sách. Có thể có quiz giúp tăng điểm sức khỏe.']
+  ]],
+  ['cards', 'Các mục con trong menu (Sub-menu)', [
+    ['Creator health rating (Điểm sức khỏe creator)', 'Điểm dành cho tài khoản creator gắn với shop.'],
+    ['Shop Performance Score (Điểm hiệu suất shop)', 'Điểm về giao hàng, đánh giá, chăm sóc khách.'],
+    ['The Star Seller recognition (Danh hiệu Star Seller)', 'Danh hiệu cho shop đạt chuẩn cao.'],
+    ['Voice of Customer (Tiếng nói khách hàng)', 'Phản hồi, khiếu nại và lý do trả hàng của khách.']
+  ]],
+  ['cards', 'Đọc bảng Violation records (Table columns)', [
+    ['Enforcement (Hình phạt áp dụng)', 'Shop bị phạt gì, ví dụ Product freeze, Shop visibility reduced, Fund withdrawal suspension, Shop closure. Nhãn Enforced nghĩa là đang được áp dụng.'],
+    ['Score (Điểm)', 'Điểm bị trừ cho vi phạm đó. Dấu -- nghĩa là vi phạm không tính theo điểm.'],
+    ['Violation reason (Lý do vi phạm)', 'Chính sách bị vi phạm, ví dụ Potential Counterfeit Or Knockoff Product.'],
+    ['Date (Ngày)', 'Ngày ghi nhận vi phạm. Thời hạn khiếu nại tính từ đây.'],
+    ['Status (Trạng thái)', 'Trạng thái xử lý của bản ghi. Expired thường nghĩa là đã hết hạn khiếu nại hoặc xử lý, bấm View details để xem chính xác.'],
+    ['Action (Thao tác)', 'Nút View details mở chi tiết, bằng chứng và nút khiếu nại nếu còn hạn.']
+  ]],
+  ['cards', 'Bộ lọc nhanh và bộ lọc (Filters)', [
+    ['Unread violations', 'Vi phạm chưa đọc. Có số đỏ là có vi phạm mới.'],
+    ['To appeal within 48 hours', 'Vi phạm sắp hết hạn khiếu nại. Xem đầu tiên mỗi ngày.'],
+    ['To correct within 48 hours', 'Vi phạm cần sửa trong 48 giờ, ví dụ sửa listing.'],
+    ['Bộ lọc khác', 'Record ID, Date, Enforcement status, Appeal status, Policy violation type, Punishment type, Correction status, Metric-driven violations.']
   ]],
   ['ol', 'Khi nhận một vi phạm (Handling a violation)', [
-    'Đọc kỹ lý do và điều khoản bị nêu.',
-    'Sửa ngay nguyên nhân: chỉnh listing, hoàn tất đơn, trả lời khách.',
-    'Nếu cho rằng bị phạt sai, gửi appeal kèm bằng chứng (ảnh, video đóng gói, hóa đơn, tin nhắn).',
-    'Ghi lại nguyên nhân để tránh lặp lại.'
+    'Mở Violation records, bấm quick filter To appeal within 48 hours và To correct within 48 hours trước.',
+    'Bấm View details để đọc lý do, chính sách bị trích dẫn và hạn chót.',
+    'Sửa ngay nguyên nhân: chỉnh hoặc gỡ listing, bổ sung giấy tờ, hoàn tất đơn.',
+    'Nếu cho rằng bị phạt sai, gửi appeal trong thời hạn kèm bằng chứng (hóa đơn nhập hàng, giấy ủy quyền thương hiệu, ảnh đóng gói, giấy tờ đăng ký).',
+    'Theo dõi cột Status và Appeal status cho đến khi có kết quả.'
   ]],
   ['tip', 'Mẹo (Tips)', [
+    'Mở Account health mỗi ngày. Nhiều hạn khiếu nại chỉ có 48 giờ.',
     'Giao đúng hạn, mô tả đúng sự thật, trả lời khách nhanh là ba việc giữ điểm tốt nhất.',
-    'Giữ thông tin tài khoản, địa chỉ và thiết bị đăng nhập nhất quán và đúng thực tế. Thay đổi bất thường có thể khiến tài khoản bị xem xét.'
+    'Bán hàng có thương hiệu phải có hóa đơn hoặc giấy ủy quyền, nếu không dễ bị Product freeze vì nghi hàng giả.'
   ]],
   ['warn', 'Lỗi hay gặp (Common mistakes)', [
-    'Phớt lờ cảnh báo cho đến khi bị hạn chế.',
-    'Gửi appeal mà không có bằng chứng.'
+    'Không mở Violation records đến khi hết hạn khiếu nại, trạng thái chuyển Expired.',
+    'Gửi appeal mà không có bằng chứng.',
+    'Chỉ nhìn điểm mà bỏ qua cột Enforcement. Một vi phạm nghiêm trọng có thể khóa shop dù điểm vẫn ở mức mặc định.'
   ]],
   ['terms', 'Từ chuyên ngành (Key terms)', [
-    ['Account health', 'Sức khỏe tài khoản', 'Tình trạng tuân thủ của shop.'],
-    ['Violation', 'Vi phạm', 'Lỗi bị trừ điểm.'],
+    ['Account health rating', 'Điểm sức khỏe tài khoản', 'Thang điểm 0 đến 1000 của shop.'],
+    ['Violation records', 'Hồ sơ vi phạm', 'Danh sách vi phạm và hình phạt.'],
+    ['Warning records', 'Hồ sơ cảnh báo', 'Cảnh báo chưa thành vi phạm.'],
+    ['Enforcement', 'Hình phạt áp dụng', 'Biện pháp sàn áp dụng lên shop.'],
+    ['Enforced', 'Đang áp dụng', 'Hình phạt có hiệu lực.'],
+    ['Expired', 'Đã hết hạn', 'Thường là hết hạn khiếu nại hoặc xử lý.'],
+    ['Punishment type', 'Loại hình phạt', 'Bộ lọc theo loại hình phạt.'],
     ['Appeal', 'Khiếu nại', 'Yêu cầu xem xét lại quyết định.'],
-    ['Suspension', 'Đình chỉ', 'Shop bị tạm khóa.'],
-    ['Cancellation rate', 'Tỉ lệ hủy đơn', 'Đơn shop tự hủy ÷ tổng đơn.']
+    ['Quiz', 'Bài kiểm tra', 'Làm đạt có thể giúp tăng điểm.']
   ]]
 ]},
 
@@ -673,39 +698,59 @@ var DATA = [
   ]]
 ]},
 
-{ id: 'account-status', g: 'control', en: 'Live or dead check', vi: 'Kiểm tra tài khoản còn sống hay đã die', lead: 'Cách đọc trạng thái shop trong vài phút, dựa trên những gì Seller Center hiển thị, không cần đoán. Làm theo thứ tự các bước bên dưới.', b: [
-  ['cards', 'Các trạng thái thường gặp (Account statuses)', [
-    ['Live (Đang hoạt động)', 'Đăng nhập được, Orders và Products mở bình thường, không có banner đỏ, sản phẩm ở trạng thái Live và nhận được đơn.'],
-    ['Under review (Đang chờ duyệt)', 'Đăng ký hoặc xác minh chưa xong. Chưa bán được cho đến khi được duyệt.'],
-    ['Restricted (Bị hạn chế)', 'Shop còn sống nhưng mất một số quyền như đăng sản phẩm, chạy LIVE, chạy quảng cáo hoặc rút tiền. Lý do nằm trong Account health.'],
-    ['Suspended or Banned (Bị đình chỉ hoặc khóa)', 'Có thông báo khóa shop. Thường không còn dùng được các tính năng bán hàng. Đây là trường hợp gọi là die.'],
-    ['Deactivated or Closed (Đã đóng)', 'Shop bị đóng, do chủ shop đóng hoặc do hệ thống đóng sau vi phạm nặng.'],
-    ['Login failed (Không đăng nhập được)', 'Sai thông tin, cần khôi phục tài khoản. Chưa chắc là shop bị khóa.']
+{ id: 'account-status', g: 'control', en: 'Live or dead check', vi: 'Kiểm tra tài khoản còn sống hay đã die', lead: 'Cách đọc trạng thái shop dựa trên đúng những gì Seller Center hiển thị: banner đầu trang, trạng thái trong Account health rating và cột Enforcement trong Violation records.', b: [
+  ['cards', 'Ba chỗ cần nhìn (Where to look)', [
+    ['Banner đầu trang', 'Banner đỏ Account deactivated: Your account has been deactivated by TikTok Shop nghĩa là shop đã bị vô hiệu hóa. Không có banner là dấu hiệu tốt.'],
+    ['Trạng thái ở Overview', 'Account health, tab Overview. Ví dụ Suspended kèm dòng e-commerce permission was suspended nghĩa là quyền bán hàng bị đình chỉ.'],
+    ['Cột Enforcement ở Violation records', 'Liệt kê hình phạt đang áp dụng. Shop closure và Fund withdrawal suspension là hai hình phạt nặng nhất.']
+  ]],
+  ['cards', 'Kết luận nhanh (Decision guide)', [
+    ['Live (Đang hoạt động)', 'Không có banner đỏ, trạng thái không phải Suspended, không có hình phạt Enforced nào chặn bán hàng hoặc rút tiền.'],
+    ['Restricted (Bị hạn chế)', 'Còn bán được nhưng có hình phạt Enforced như Product freeze, Shop visibility reduced hoặc Daily order creation is limited.'],
+    ['Die (Đã bị khóa)', 'Có banner Account deactivated, trạng thái Suspended, hoặc có hình phạt Shop closure đang Enforced.'],
+    ['Under review (Đang chờ duyệt)', 'Shop mới, hồ sơ đăng ký chưa được duyệt. Chưa bán được.']
+  ]],
+  ['cards', 'Các loại hình phạt thường gặp (Enforcement types)', [
+    ['Product freeze (Đóng băng sản phẩm)', 'Sản phẩm bị khóa, không bán được.'],
+    ['Shop visibility reduced (Giảm hiển thị shop)', 'Shop và sản phẩm ít được đề xuất hơn.'],
+    ['Daily order creation is limited (Giới hạn đơn mỗi ngày)', 'Số đơn mới mỗi ngày bị giới hạn.'],
+    ['Fund withdrawal suspension (Tạm khóa rút tiền)', 'Không rút được tiền về ngân hàng dù đã add bank.'],
+    ['Shop closure (Đóng shop)', 'Shop bị đóng. Đây là mức nặng nhất.']
+  ]],
+  ['cards', 'Lý do vi phạm nặng hay gặp (Severe violation reasons)', [
+    ['Unacceptable Onboarding Documentation', 'Giấy tờ đăng ký không được chấp nhận: không hợp lệ, không khớp, hoặc không xác minh được.'],
+    ['High-risk shop group, requires additional verification', 'Shop bị xếp vào nhóm shop rủi ro cao và phải xác minh thêm. Thường liên quan đến nhiều shop có dấu hiệu liên kết với nhau (cùng người, thiết bị, mạng, giấy tờ hoặc ngân hàng).'],
+    ['Potential Counterfeit Or Knockoff Product', 'Nghi hàng giả hoặc hàng nhái thương hiệu.']
   ]],
   ['ol', 'Kiểm tra theo thứ tự (Step by step)', [
-    'Đăng nhập Seller Center và xem Home. Banner đỏ hoặc cam là dấu hiệu cần đọc ngay.',
-    'Mở Account health: đọc trạng thái shop, điểm vi phạm (violation points), lý do và thời hạn xử lý.',
-    'Mở Products: xem sản phẩm đang Live hay bị Deactivated hoặc Rejected.',
-    'Mở Orders: còn nhận và xử lý được đơn không, có đơn nào đang kẹt.',
-    'Mở hộp thư thông báo (Notifications, Inbox): tìm thông báo hạn chế hoặc khóa, thường ghi rõ lý do và hạn khiếu nại.',
-    'Nếu bị hạn chế hoặc khóa: chụp màn hình lý do, gom bằng chứng (ảnh đóng gói, hóa đơn, tin nhắn khách), rồi gửi Appeal đúng hạn.'
+    'Đăng nhập Seller Center và nhìn đầu trang có banner đỏ Account deactivated không.',
+    'Mở Account health, tab Overview: đọc trạng thái (ví dụ Suspended) và bấm View details cạnh dòng giải thích.',
+    'Mở tab Violation records: đọc cột Enforcement, Violation reason, Date và Status của từng dòng.',
+    'Bấm View details từng vi phạm để biết còn hạn khiếu nại không. Status Expired thường nghĩa là đã quá hạn.',
+    'Mở Finances để xem tiền: nếu có hình phạt Fund withdrawal suspension thì tiền không rút được.',
+    'Chụp màn hình lại toàn bộ trước khi làm gì khác.'
   ]],
-  ['tip', 'Mẹo (Tips)', [
-    'Chụp màn hình trạng thái và lý do trước khi làm bất cứ thao tác nào.',
-    'Đọc điều khoản chính sách mà thông báo trích dẫn, rồi sửa đúng nguyên nhân trước khi khiếu nại.',
-    'Khi bị khóa, hãy khiếu nại hoặc liên hệ hỗ trợ. Mở shop mới bằng cùng danh tính hoặc thiết bị để lách khóa vi phạm chính sách và dễ bị khóa tiếp.'
+  ['tip', 'Nếu shop đã bị khóa (If the shop is deactivated)', [
+    'Đọc View details của từng vi phạm. Nếu còn hạn, gửi appeal kèm bằng chứng đúng với lý do bị phạt.',
+    'Với lý do giấy tờ đăng ký, chỉ giấy tờ thật, hợp lệ, đứng tên đúng người hoặc doanh nghiệp mới có khả năng được chấp nhận.',
+    'Khi đã hết hạn khiếu nại, liên hệ hỗ trợ người bán qua Seller Center để hỏi về tình trạng và số tiền còn lại trong shop.',
+    'Mở shop mới bằng cùng danh tính, thiết bị hoặc mạng để lách khóa vi phạm chính sách và thường bị khóa tiếp theo nhóm.'
   ]],
   ['warn', 'Dễ khiến shop bị xem xét (Risk signals)', [
-    'Đăng nhập nhiều tài khoản trên cùng một thiết bị.',
+    'Nhiều shop dùng chung người, thiết bị, mạng, giấy tờ hoặc ngân hàng.',
     'IP, vị trí hoặc thiết bị đổi liên tục, không khớp thông tin đăng ký.',
-    'Mô tả sai sự thật, giao trễ, hủy đơn nhiều, hoặc đơn bị khiếu nại nhiều.'
+    'Giấy tờ đăng ký không thật, không khớp hoặc mượn của người khác.',
+    'Bán hàng có thương hiệu mà không có hóa đơn hoặc giấy ủy quyền.'
   ]],
   ['terms', 'Từ chuyên ngành (Key terms)', [
-    ['Live', 'Đang hoạt động', 'Shop bán được bình thường.'],
-    ['Under review', 'Đang chờ duyệt', 'Hồ sơ đang được kiểm tra.'],
-    ['Restricted', 'Bị hạn chế', 'Mất một số quyền của shop.'],
-    ['Suspended', 'Bị đình chỉ', 'Shop bị tạm khóa hoặc khóa.'],
-    ['Appeal', 'Khiếu nại', 'Yêu cầu xem xét lại quyết định.']
+    ['Account deactivated', 'Tài khoản bị vô hiệu hóa', 'Shop bị khóa, hiện ở banner đầu trang.'],
+    ['Suspended', 'Bị đình chỉ', 'Quyền bán hàng bị đình chỉ.'],
+    ['Shop closure', 'Đóng shop', 'Hình phạt nặng nhất.'],
+    ['Fund withdrawal suspension', 'Tạm khóa rút tiền', 'Không rút được tiền về ngân hàng.'],
+    ['Product freeze', 'Đóng băng sản phẩm', 'Sản phẩm bị khóa bán.'],
+    ['High-risk shop group', 'Nhóm shop rủi ro cao', 'Nhóm shop có dấu hiệu liên kết, bị xem xét chung.'],
+    ['Onboarding documentation', 'Giấy tờ đăng ký', 'Giấy tờ nộp khi mở shop.'],
+    ['Counterfeit, Knockoff', 'Hàng giả, hàng nhái', 'Sản phẩm giả mạo thương hiệu.']
   ]]
 ]},
 
@@ -736,7 +781,8 @@ var DATA = [
     'Shop mới thường có khoản Reserve hoặc chu kỳ thanh toán dài hơn.',
     'Đang có khiếu nại, tranh chấp hoặc vi phạm chưa xử lý.',
     'Chưa add ngân hàng, hoặc ngân hàng chưa được xác minh.',
-    'Shop đang bị hạn chế hoặc đình chỉ nên việc rút tiền bị chặn.'
+    'Shop đang bị hạn chế hoặc đình chỉ nên việc rút tiền bị chặn.',
+    'Trong Account health, Violation records có hình phạt Fund withdrawal suspension đang Enforced. Khi đó dù đã add bank, tiền vẫn không rút được.'
   ]],
   ['warn', 'Lưu ý (Notes)', [
     'Tên chủ tài khoản ngân hàng phải khớp với thông tin đăng ký của shop.',
