@@ -978,6 +978,105 @@ var DATA = [
   ]]
 ]},
 
+{ id: 'link-ads-manager', g: 'control', en: 'Link Shop with Ads Manager', vi: 'Link Shop với TikTok Ads Manager', lead: 'Shop không tự nối thẳng với Ads Manager. Để chạy quảng cáo cho shop (GMV Max, Shop Ads), bạn phải nối một chuỗi: Shop, Business Center, Ad account và kênh TikTok chính thức. Thiếu một mắt xích là không tạo được chiến dịch hoặc chiến dịch bị tạm dừng.', b: [
+  ['cards', 'Bức tranh tổng thể (The chain)', [
+    ['1. Shop (Seller Center)', 'Cửa hàng của bạn. Cần quyền Shop Owner, Admin hoặc Advertising Manager để cho phép quảng cáo.'],
+    ['2. Business Center (BC)', 'Nơi gom shop, kênh và ad account. Mỗi shop chỉ link được với một BC. Xem tab Business Center (BC).'],
+    ['3. Ad account (Ads Manager)', 'Nơi tạo chiến dịch và trả tiền quảng cáo. Ad account phải nằm trong BC đang sở hữu shop.'],
+    ['4. Kênh TikTok chính thức', 'Official account của shop. Phải còn liên kết với shop, với BC và là TikTok Business Account của ad account. Xem tab Official account.']
+  ]],
+  ['cards', 'Ba đường để nối (Ways to connect)', [
+    ['Đường 1: từ Business Center', 'Admin BC thêm shop (Accounts, Shops, Add Shop) hoặc xin quyền bằng shop code. Đây là đường cơ bản nhất.'],
+    ['Đường 2: từ Seller Center', 'Trong mục Shop Ads, nối ad account và kênh TikTok vào BC đang gắn với shop.'],
+    ['Đường 3: từ Ads Manager qua Showcase', 'Nối kênh TikTok có quyền Showcase vào ad account. Nguồn sản phẩm là Showcase của kênh, không phải toàn bộ shop.']
+  ]],
+  ['tip', 'Chuẩn bị trước khi nối (Before you start)', [
+    'Tài khoản của bạn là Admin trong Business Center và có quyền Owner, Admin hoặc Advertising Manager của shop.',
+    'Shop đã xong đăng ký và xác minh, có Official account link sẵn.',
+    'Đã có ad account trong cùng BC. Nếu chưa có, tạo ở TikTok for Business và xin quyền cho mục tiêu bán hàng (Sales).',
+    'Shop US đi với BC và ad account khu vực US. Lệch khu vực thường báo lỗi không link được.',
+    'Chủ shop hoặc chủ kênh sẵn sàng duyệt yêu cầu bằng email hoặc quét mã QR bằng app TikTok.'
+  ]],
+  ['ol', 'Đường 1: thêm Shop vào BC (From Business Center)', [
+    'Đăng nhập Business Center bằng tài khoản Admin.',
+    'Ở menu trái chọn Accounts, rồi Shops, rồi Add Shop.',
+    'Chọn shop muốn thêm, rồi bấm Start setup in TikTok Seller Center. Chưa có shop thì bấm Create a new TikTok Shop.',
+    'Làm tiếp các bước trong Seller Center, rồi bấm Finish Setup.',
+    'Nếu shop thuộc người khác (đối tác, khách hàng): chọn Request access to TikTok Shop partners, nhập Shop code và bấm Request. Chủ shop và admin nhận email để duyệt. Chỉ khi họ duyệt thì shop mới nối vào BC của bạn.',
+    'Sau khi nối xong: vào lại Accounts, Shops. Bấm Assign new member để phân quyền cho người dùng, bấm Add Assets để gán kênh TikTok.'
+  ]],
+  ['ol', 'Đường 2: nối kênh TikTok từ Seller Center (From Seller Center)', [
+    'Đăng nhập Seller Center bằng email có quyền Shop Owner, Admin hoặc Advertising Manager.',
+    'Chọn Shop Ads ở menu trái. Nếu thấy nút Create Campaign hoặc Create Ads thì đã nối đủ, có thể tạo quảng cáo ngay. Chưa thấy thì làm theo các bước báo trên trang.',
+    'Bấm biểu tượng bánh răng cạnh tên ad account ở đầu trang.',
+    'Ở phần Available TikTok accounts, xem trạng thái từng kênh và bấm đúng nút: Authorize now (cấp đủ quyền quảng cáo cho kênh), Edit access (kênh chưa được chủ cấp đủ quyền), Get permission (nhận quyền mà chủ kênh đã cấp).',
+    'Muốn nối kênh mới: bấm + Connect account, rồi chủ kênh quét mã QR bằng app TikTok để cấp quyền cho BC đang gắn với shop.',
+    'Bấm Got it khi xong.'
+  ]],
+  ['ol', 'Đặt ad account chính cho GMV Max (Primary ad account)', [
+    'Vào Seller Center bằng tài khoản có quyền đối tác với shop, chọn Shop Ads, rồi Manage account.',
+    'Ở phần GMV Max account, bấm Add GMV Max account dưới mục Authorization needed.',
+    'Chọn ad account muốn dùng làm ad account chính của shop (primary ad account).',
+    'Lưu ý: các bước này lấy từ tài liệu bên thứ ba cộng với trang GMV Max guidelines của TikTok. Tên nút chính xác để đặt primary có thể khác trên màn hình của bạn, hãy đối chiếu trực tiếp trong Seller Center.'
+  ]],
+  ['ol', 'Đường 3: nối qua Showcase (From Ads Manager)', [
+    'Trong Ads Manager, vào User Settings, chọn Edit access.',
+    'Chọn Read products that appear on your TikTok account để cấp quyền Showcase.',
+    'Nếu kênh đã được cấp quyền qua BC nhưng thiếu Showcase: vào Business Center, chọn TikTok Account, bấm biểu tượng bút chì, chọn Ad delivery with showcase, tạo mã QR và chủ kênh quét để cấp quyền.'
+  ]],
+  ['cards', 'Giới hạn cần nhớ (Limits)', [
+    ['1 BC mỗi shop', 'Một shop chỉ link được với một Business Center. Muốn người khác dùng, hãy chia sẻ quyền truy cập shop, đừng link thêm BC.'],
+    ['1 ad account GMV Max mỗi shop', 'Tại một thời điểm, chỉ một ad account (là ad account chính trong Seller Center) được dùng GMV Max cho shop.'],
+    ['1 ad account, nhiều shop', 'Cùng một ad account có thể làm ad account chính cho nhiều shop.'],
+    ['Thị trường', 'Shop Ads và GMV Max dành cho một số thị trường, trong đó có US.']
+  ]],
+  ['warn', 'Đổi ad account chính (Changing the primary account)', [
+    'Khi đổi ad account chính, ad account cũ mất quyền GMV Max của shop và các chiến dịch GMV Max cũ của shop ở đó bị tạm dừng.',
+    'Chuyển sang ad account khác bằng bánh răng ở Shop Ads cũng làm tắt các chiến dịch GMV Max hiện có. Bạn phải tạo lại chiến dịch ở tài khoản mới.',
+    'Nếu gỡ Official account khỏi shop, khỏi BC hoặc khỏi ad account, các chiến dịch LIVE GMV Max dùng kênh đó có thể bị tạm dừng.',
+    'Chiến dịch GMV Max đang chạy có thể làm tạm dừng Video Shopping Ads và Product Shopping Ads dùng cùng sản phẩm, dù tạo từ ad account nào. Chúng không tự chạy lại, bạn phải bật lại.'
+  ]],
+  ['ol', 'Kiểm tra đã nối đúng chưa (Verify)', [
+    'Trong Seller Center, mở Shop Ads. Thấy nút Create GMV Max ads (hoặc Create Campaign) là đã nối đủ.',
+    'Trong Ads Manager, tạo thử chiến dịch với mục tiêu Sales, chọn TikTok Shop làm nguồn sản phẩm (product source). Thấy shop trong danh sách là đã link thành công.',
+    'Trong Business Center, vào Accounts, Shops và kiểm tra shop, kênh, ad account nằm đúng BC.'
+  ]],
+  ['warn', 'Lỗi hay gặp (Common errors)', [
+    'Báo Shop must belong to a Business Center account: ad account nằm ở BC khác (ví dụ BC của agency) với BC sở hữu shop. Cần chia sẻ shop sang BC của agency hoặc dùng ad account trong đúng BC. Thông tin này từ tài liệu bên thứ ba.',
+    'Không thấy nút Add Shop: tài khoản chưa có quyền Admin trong BC.',
+    'Yêu cầu treo mãi: chủ shop hoặc chủ kênh chưa duyệt qua email hoặc app TikTok.',
+    'Không tạo được chiến dịch GMV Max: ad account đang dùng không phải ad account chính của shop.',
+    'Không thấy kênh trong Available TikTok accounts: kênh chưa được thêm vào BC hoặc chưa cấp quyền ad delivery.'
+  ]],
+  ['tip', 'Kinh nghiệm vận hành (Practical tips)', [
+    'Làm theo thứ tự: BC, shop, kênh chính thức, ad account, rồi mới đặt ad account chính. Đảo thứ tự dễ báo lỗi.',
+    'Dùng một ad account riêng cho GMV Max của mỗi nhóm shop, đừng đổi qua lại. Mỗi lần đổi là chiến dịch bị tắt.',
+    'Giao quyền Admin BC và quyền Owner shop cho người đáng tin. Ai có quyền này thì đổi được ad account chính.',
+    'Chụp màn hình trang Shop Ads, Linked TikTok Accounts và BC sau khi nối xong, để đối chiếu khi có sự cố.',
+    'Chưa thấy hướng dẫn chính thức về cách gỡ liên kết shop khỏi BC hoặc ad account. Trước khi gỡ, hãy hỏi Seller Support vì có thể làm dừng chiến dịch.'
+  ]],
+  ['terms', 'Từ chuyên ngành (Key terms)', [
+    ['Ads Manager', 'Trình quản lý quảng cáo', 'Nơi tạo và theo dõi chiến dịch.'],
+    ['Ad account', 'Tài khoản quảng cáo', 'Nơi chứa chiến dịch và thanh toán.'],
+    ['Primary ad account', 'Ad account chính của shop', 'Ad account được dùng GMV Max cho shop.'],
+    ['Business Center (BC)', 'Trung tâm doanh nghiệp', 'Nơi gom shop, kênh và ad account.'],
+    ['Product source', 'Nguồn sản phẩm', 'Nơi quảng cáo lấy sản phẩm: TikTok Shop, Showcase hoặc Catalog.'],
+    ['Showcase', 'Kệ sản phẩm của kênh', 'Sản phẩm hiển thị trên kênh TikTok.'],
+    ['Shop Ads', 'Quảng cáo cho shop', 'Nhóm quảng cáo bán hàng của TikTok Shop.'],
+    ['GMV Max', 'Quảng cáo tối ưu doanh số', 'Dạng quảng cáo tự động cho TikTok Shop.'],
+    ['Ad delivery permission', 'Quyền chạy quảng cáo', 'Quyền dùng kênh để chạy ads.']
+  ]],
+  ['links', 'Nguồn tham khảo (Sources)', [
+    ['Add a TikTok Shop from Business Center (TikTok)', 'https://ads.tiktok.com/help/article/add-tiktok-shop-from-business-center'],
+    ['Requesting TikTok Shop access in Business Center (TikTok)', 'https://ads.tiktok.com/help/article/requesting-tiktok-shop-access-business-center'],
+    ['Manage account permissions in Seller Center (TikTok)', 'https://ads.tiktok.com/help/article/manage-account-permissions-in-seller-center?lang=en'],
+    ['GMV Max guidelines (TikTok)', 'https://ads.tiktok.com/help/article/gmv-max-guidelines'],
+    ['How to create a Product GMV Max campaign in Seller Center (TikTok)', 'https://ads.tiktok.com/help/article/how-to-create-product-gmv-max-ads-in-seller-center'],
+    ['About product sources for TikTok Shop ads (TikTok)', 'https://ads.tiktok.com/help/article/product-sources-introductions'],
+    ['GMV Max and TikTok Ads (Cruva, bên thứ ba)', 'https://cruva.com/help-center/integrations/gmv-max-and-tiktok-ads']
+  ]]
+]},
+
 { id: 'verify-business', g: 'control', en: 'Verify business', vi: 'Xác minh doanh nghiệp', lead: 'Business verification (xác minh doanh nghiệp) là bước chứng minh với TikTok rằng bạn là một doanh nghiệp thật, bằng giấy tờ đăng ký kinh doanh. Kết quả hiện ra là Verified (đã xác minh) hoặc Unverified (chưa xác minh).', b: [
   ['cards', 'Phân biệt hai việc dễ nhầm (Do not mix up)', [
     ['Xác minh khi đăng ký bán hàng (Seller verification)', 'Làm trong Seller Center khi mở shop: danh tính chủ shop, doanh nghiệp, ngân hàng. Quyết định shop có bán được và nhận tiền không.'],
